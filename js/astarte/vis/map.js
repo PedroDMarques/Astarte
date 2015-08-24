@@ -1,0 +1,3 @@
+/*global astarte*/
+/*global L*/
+
