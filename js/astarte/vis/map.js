@@ -17,6 +17,9 @@ astarte.Map = L.mapbox.map.extend({
 		
 		L.mapbox.Map.prototype.initialize.call(this, DOMid, mapId, options);
 		
+		this._dataLayers = {};
+		
+		return this;
 	},
 	
 	// -----------------------------------------------------------------
@@ -25,6 +28,34 @@ astarte.Map = L.mapbox.map.extend({
 		return this;
 	},
 	
+	// -----------------------------------------------------------------
+	addDataLayer: function(name, layer){
+		
+		// Don't overwrite any existing layer with the same name
+		if(!this._dataLayers[name]){
+			this._dataLayers[name] = layer;
+			// Add the layer by default
+			this.addLayer(layer);
+		}
+		
+		return this;
+		
+	},
 	
+	// -----------------------------------------------------------------
+	toggleDataLayer: function(name){
+		this._dataLayers[name].toggle();
+		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	redraw: function(){
+		for(var dl in this._dataLayers){
+			if(this._dataLayers[dl].isVisible()){
+				this._dataLayers[dl].redraw();
+			}
+		}
+		return this;
+	}
 	
 });
