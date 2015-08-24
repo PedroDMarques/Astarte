@@ -5,5 +5,3 @@
 */cache/!index.html
 */cache/!.htaccess
 .settings/settings.json
-application/config/autoload.php
-application/config/constants.php
