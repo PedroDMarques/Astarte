@@ -36,7 +36,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<!--
 			Astarte
 		-->
-		
+		<script src="<?php echo base_url();?>js/astarte/main.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/map.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/dataLayer.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/markerLayer.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/markerCreator.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/info/broker.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/info/filter.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 	

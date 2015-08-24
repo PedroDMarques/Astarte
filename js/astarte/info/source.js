@@ -55,7 +55,7 @@ astarte.Source = L.Class.extend({
 		var i = 0;
 		
 		while(!added){
-			if(i === this._markers.length - 1){
+			if(i === this._markers.length){
 				this._markers.push(marker);
 				added = true;
 			}else if(genTime <= this._markers[i].genTime){
@@ -65,6 +65,16 @@ astarte.Source = L.Class.extend({
 			i++;
 		}
 		
+	},
+	
+	// -----------------------------------------------------------------
+	getAllMarkers: function(){
+		return this._markers;
+	},
+	
+	// -----------------------------------------------------------------
+	getFilteredMarkers: function(filter){
+		return filter.filterMany(this._markers);
 	}
 	
 });

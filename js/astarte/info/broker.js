@@ -49,7 +49,7 @@ astarte.Broker = L.Class.extend({
 	addLocation: function(deviceMac, lat, lng, genTime, data){
 		
 		// Verifying variables
-		if(!this._sources[deviceMac] || lat || lng || genTime){
+		if(!this._sources[deviceMac] || !lat || !lng || !genTime){
 			return;
 		}
 		
@@ -64,6 +64,11 @@ astarte.Broker = L.Class.extend({
 		});
 		
 		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	getSources: function(){
+		return this._sources;
 	}
 	
 })

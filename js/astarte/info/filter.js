@@ -1,7 +1,7 @@
 /*global astarte*/
 /*global L*/
 
-astarte.DataLayer = L.LayerGroup.extend({
+astarte.Filter = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -9,17 +9,8 @@ astarte.DataLayer = L.LayerGroup.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(map, broker, filter, options){
-		
-		L.LayerGroup.prototype.initialize.call(this, []);
-		
+	initialize: function(options){
 		this.setOptions(options);
-		
-		this._Amap = map;
-		this._broker = broker;
-		this._filter = filter;
-		
-		this._visible = true;
 		
 		return this;
 	},
@@ -31,23 +22,16 @@ astarte.DataLayer = L.LayerGroup.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(){},
-	
-	// -----------------------------------------------------------------
-	toggle: function(){
-		this._visible = !this._visible;
-		if(this._visible){
-			this._Amap.addLayer(this);
-			this.redraw();
-		}else{
-			this._Amap.removeLayer(this);
-		}
+	filterOne: function(obj){
 		return this;
 	},
 	
 	// -----------------------------------------------------------------
-	isVisible: function(){
-		return this._visible;
+	filterMany: function(arr){
+		return {
+			"passed" : arr,
+			"failed" : [],
+		};
 	}
 	
 });

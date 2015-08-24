@@ -5,7 +5,7 @@
 L.mapbox.accessToken = "pk.eyJ1IjoiZGFsYW5uYXIiLCJhIjoiYjA0MTcyZDMyNzg2YWNjYTA3ZGE1MGMxMDI5ZWMyYjgifQ.25SjWDdKObbZvLpuGwZM4A";
 
 
-astarte.Map = L.mapbox.map.extend({
+astarte.Map = L.mapbox.Map.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -18,6 +18,8 @@ astarte.Map = L.mapbox.map.extend({
 		L.mapbox.Map.prototype.initialize.call(this, DOMid, mapId, options);
 		
 		this._dataLayers = {};
+		
+		this._setupContextMenu();
 		
 		return this;
 	},
@@ -56,6 +58,30 @@ astarte.Map = L.mapbox.map.extend({
 			}
 		}
 		return this;
-	}
+	},
+	
+	//-----------------------------------------------------------------------------
+	_setupContextMenu: function(){
+		this.contextmenu.addItem({
+			"text" : "Redraw map",
+			"callback" : function(){
+				this.redraw();
+			},
+			"context" : this,
+		});
+		
+		this.contextmenu.addItem({
+			"separator" : true,
+		});
+		
+		this.contextmenu.addItem({
+			"text" : "Toggle Markers",
+			"callback" : function(){
+				this.toggleDataLayer("markers");
+			},
+			"context" : this,
+		});
+		
+	},
 	
 });
