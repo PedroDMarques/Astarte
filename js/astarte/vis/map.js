@@ -15,6 +15,7 @@ astarte.Map = L.mapbox.Map.extend({
 	// -----------------------------------------------------------------
 	objNetwork: {
 		"broker" : null,
+		"marker_creator" : null,
 		"info_bubble" : null,
 	},
 	
@@ -91,5 +92,10 @@ astarte.Map = L.mapbox.Map.extend({
 		});
 		
 	},
+	
+	//-----------------------------------------------------------------------------
+	getDataLayer: function(name){
+		return this._dataLayers[name];
+	}
 	
 });

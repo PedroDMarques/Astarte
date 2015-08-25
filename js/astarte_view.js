@@ -4,8 +4,11 @@ var broker = new astarte.Broker({
 	"info-bubble" : infoBubble,
 });
 
+var markerCreator = new astarte.MarkerCreator({});
+
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
+	"marker_creator" : markerCreator,
 	"info_bubble" : infoBubble,
 },{
 	"zoomControl" : false,

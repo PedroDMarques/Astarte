@@ -1,23 +1,29 @@
 /*global astarte*/
 /*global L*/
 
-astarte.markerCreator = {
+astarte.MarkerCreator = L.Class.extend({
 
-	// -----------------------------------------------------------------
-	createMarker: function(obj){
+	//-----------------------------------------------------------------------------
+	options: {
 		
-		var marker = L.marker([obj.lat, obj.lng], {
-			"riseOnHover" : true,
-		});
+	},
+	
+	//-----------------------------------------------------------------------------
+	initialize: function(){
+		return this;	
+	},
+	
+	//-----------------------------------------------------------------------------
+	createIcon: function(marker, data){
+		
+		var color = !marker.highlighted ? "#a50" : "#f00"; 
 		
 		var icon = L.mapbox.marker.icon({
 			"marker-size" : "medium",
 			"marker-symbol" : "pitch",
-			"marker-color" : "#a50",
+			"marker-color" : color,
 		});
-		
-		marker.setIcon(icon);
-		return marker;
-	}
+		return icon;
+	},
 	
-}
+});

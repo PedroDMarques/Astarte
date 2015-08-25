@@ -6,8 +6,6 @@ astarte.Source = L.Class.extend({
 	// -----------------------------------------------------------------
 	options: {
 		
-		"marker_create_function" : astarte.markerCreator.createMarker,
-		
 	},
 	
 	// -----------------------------------------------------------------
@@ -48,16 +46,16 @@ astarte.Source = L.Class.extend({
 		this._locationData[genTime] = data;
 		
 		// Get a marker made
-		var marker = this.options["marker_create_function"]({
-			"deviceMac" : this._deviceMac,
-			"userType" : this._userType,
-			"lat" : lat,
-			"lng" : lng,
-			"genTime" : genTime,
-			"data" : data,
+		var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+		
+		var marker = L.marker([lat, lng], {
+			"riseOnHover" : true,
 		});
 		
 		marker.genTime = genTime;
+		marker.highlighted = false;
+		
+		marker.setIcon(markerCreator.createIcon(marker, data));
 		
 		// Order the marker into this._markers
 		var added = false;
@@ -74,21 +72,8 @@ astarte.Source = L.Class.extend({
 			i++;
 		}
 		
-		marker.addEventListener("click", function(){
-			
-			var infoB = astarte.util.findFirstObjNetwork(this, ["broker", "map", "info_bubble"]);
-			
-			if(infoB){
-				
-				var props = data;
-				props.genTime = genTime;
-				props.lat = lat;
-				props.lng = lng;
-				
-				infoB.setContent(this._deviceMac, props);
-				
-			}
-		}, this);
+		marker.addEventListener("click", this._infoBubbleEvent, this);
+		marker.addEventListener("click", this.highlightMarkers, this);
 		
 	},
 	
@@ -106,5 +91,58 @@ astarte.Source = L.Class.extend({
 	getUserType: function(){
 		return this._userType;	
 	},
+	
+	// -----------------------------------------------------------------
+	highlightMarkers: function(){
+		
+		for(var i = 0; i < this._markers.length; i++){
+			var marker = this._markers[i];
+			
+			marker.highlighted = true;
+			
+			var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+			
+			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
+		}
+		
+		var map = astarte.util.findFirstObjNetwork(this, ["broker", "map"]);
+		map.addEventListener("click", this.removeHighlight, this);
+		
+		return this;
+		
+	},
+	
+	// -----------------------------------------------------------------
+	removeHighlight: function(){
+		
+		for(var i = 0; i < this._markers.length; i++){
+			var marker = this._markers[i];
+			
+			marker.highlighted = false;
+			
+			var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+			
+			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
+		}
+		return this;
+		
+	},
+	
+	// -----------------------------------------------------------------
+	_infoBubbleEvent: function(event){
+		var marker = event.target;
+		var infoB = astarte.util.findFirstObjNetwork(this, ["broker", "map", "info_bubble"]);
+			
+		if(infoB){
+			
+			var props = this._locationData[marker.genTime];
+			props.genTime = marker.genTime;
+			props.lat = marker.getLatLng().lat;
+			props.lng = marker.getLatLng().lng;
+			
+			infoB.setContent(this._deviceMac, props);
+			
+		}
+	}
 	
 });
