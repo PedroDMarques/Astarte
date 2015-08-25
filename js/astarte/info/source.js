@@ -143,6 +143,19 @@ astarte.Source = L.Class.extend({
 			infoB.setContent(this._deviceMac, props);
 			
 		}
+	},
+	
+	// -----------------------------------------------------------------
+	getLatestInfo: function(maxTime){
+		
+		var marker = astarte.util.lastInArr(this._markers);
+		
+		var toRet = this._locationData[marker.genTime];
+		toRet.genTime = marker.genTime;
+		toRet.lat = marker.getLatLng().lat;
+		toRet.lng = marker.getLatLng().lng;
+		
+		return toRet;
 	}
 	
 });

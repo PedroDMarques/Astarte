@@ -33,6 +33,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link href="<?php echo base_url();?>bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" rel='stylesheet' />
 		<script src="<?php echo base_url();?>bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 		
+		<link href="<?php echo base_url();?>plugins/webgl-heatmap-leaflet-master/css/shCoreEclipse.css" rel='stylesheet' />
+		<script src="<?php echo base_url();?>plugins/webgl-heatmap-leaflet-master/js/webgl-heatmap.js"></script>
+		<script src="<?php echo base_url();?>plugins/webgl-heatmap-leaflet-master/js/webgl-heatmap-leaflet.js"></script>
+		
 		<!--
 			Astarte
 		-->
@@ -40,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/vis/map.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/dataLayer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/markerLayer.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/heatLayer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/markerCreator.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/broker.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/filter.js"></script>

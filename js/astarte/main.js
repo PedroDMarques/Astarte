@@ -13,6 +13,11 @@ astarte.util = {
 		}
 		return obj;
 		
+	},
+	
+	// -----------------------------------------------------------------
+	lastInArr: function(arr){
+		return arr[arr.length - 1];
 	}
 	
 }

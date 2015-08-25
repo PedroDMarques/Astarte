@@ -91,6 +91,14 @@ astarte.Map = L.mapbox.Map.extend({
 			"context" : this,
 		});
 		
+		this.contextmenu.addItem({
+			"text" : "Toggle Heatmap",
+			"callback" : function(){
+				this.toggleDataLayer("heatmap");
+			},
+			"context" : this,
+		});
+		
 	},
 	
 	//-----------------------------------------------------------------------------

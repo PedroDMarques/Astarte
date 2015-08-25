@@ -23,6 +23,10 @@ var markerLayer = new astarte.MarkerLayer(map, filter, {});
 
 map.addDataLayer("markers", markerLayer);
 
+var heatLayer = new astarte.HeatLayer(map, filter, {});
+
+map.addDataLayer("heatmap", heatLayer);
+
 var request = new XMLHttpRequest();
 
 request.onreadystatechange = function(){
