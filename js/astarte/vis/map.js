@@ -61,7 +61,11 @@ astarte.Map = L.mapbox.Map.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(){
+	redraw: function(minTime, maxTime){
+		var timeline = astarte.util.findFirstObjNetwork(this, ["timeline"]);
+		minTime = minTime || timeline.getCurMin();
+		maxTime = maxTime || timeline.getCurMax();
+		console.log("Redrawing Map, minTime = " + minTime + " --- maxTime = " + maxTime);
 		for(var dl in this._dataLayers){
 			if(this._dataLayers[dl].isVisible()){
 				this._dataLayers[dl].redraw();

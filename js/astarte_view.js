@@ -20,6 +20,7 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 }).setView([38.71297, -9.15977], 15);
 
 broker.setMap(map);
+timeline.setMap(map);
 
 var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer(map, filter, {});
@@ -63,7 +64,7 @@ request.onreadystatechange = function(){
             }
 
         }
-    }
+	}
 
 }
 
