@@ -1,16 +1,22 @@
-var map = new astarte.Map('map', 'mapbox.streets-satellite', {
-	"zoomControl" : false,
-	"attributionControl" : false,
-	"contextmenu" : true,
-}).setView([38.71297, -9.15977], 15);
-
 var infoBubble = new astarte.InfoBubble("info-bubble", {});
 
 var broker = new astarte.Broker({
 	"info-bubble" : infoBubble,
 });
+
+var map = new astarte.Map('map', 'mapbox.streets-satellite', {
+	"broker" : broker,
+	"info_bubble" : infoBubble,
+},{
+	"zoomControl" : false,
+	"attributionControl" : false,
+	"contextmenu" : true,
+}).setView([38.71297, -9.15977], 15);
+
+broker.setMap(map);
+
 var filter = new astarte.Filter({});
-var markerLayer = new astarte.MarkerLayer(map, broker, filter, {});
+var markerLayer = new astarte.MarkerLayer(map, filter, {});
 
 map.addDataLayer("markers", markerLayer);
 

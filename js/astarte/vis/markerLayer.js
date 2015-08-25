@@ -9,8 +9,8 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(map, broker, filter, options){
-		astarte.DataLayer.prototype.initialize.call(this, map, broker, filter, options);
+	initialize: function(map, filter, options){
+		astarte.DataLayer.prototype.initialize.call(this, map, filter, options);
 		
 		this._clusterGroups = {};
 		
@@ -41,7 +41,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	redraw: function(){
 	
-		var sources = this._broker.getSources();
+		var sources = this._Amap.objNetwork["broker"].getSources();
 		
 		for(var deviceMac in sources){
 			

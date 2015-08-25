@@ -14,6 +14,13 @@ astarte.Broker = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
+	objNetwork: {
+		
+		"map" : null,
+		
+	},
+	
+	// -----------------------------------------------------------------
 	initialize: function(options){
 		
 		this.setOptions(options);
@@ -38,8 +45,8 @@ astarte.Broker = L.Class.extend({
 		}
 		
 		this._sources[deviceMac] = new astarte.Source(deviceMac, userType, {
-			"info-bubble" : this.options["info-bubble"],
-		});
+			"broker" : this,
+		}, {});
 		
 		this.fireEvent("source_added", {
 			"deviceMac" : deviceMac,
@@ -78,6 +85,12 @@ astarte.Broker = L.Class.extend({
 	// -----------------------------------------------------------------
 	getUserType: function(deviceMac){
 		return this._sources[deviceMac].getUserType();
+	},
+	
+	// -----------------------------------------------------------------
+	setMap: function(map){
+		this.objNetwork["map"] = map;
+		return this;
 	}
 	
 })

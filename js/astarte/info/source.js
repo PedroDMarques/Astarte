@@ -6,16 +6,23 @@ astarte.Source = L.Class.extend({
 	// -----------------------------------------------------------------
 	options: {
 		
-		"info_bubble" : null,
-		
 		"marker_create_function" : astarte.markerCreator.createMarker,
 		
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(deviceMac, userType, options){
+	objNetwork: {
+		
+		"broker" : null,
+		
+	},
+	
+	// -----------------------------------------------------------------
+	initialize: function(deviceMac, userType, objNetwork, options){
 		
 		this.setOptions(options);
+	
+		$.extend(this.objNetwork, objNetwork);
 	
 		this._deviceMac = deviceMac;
 		this._userType = userType;
@@ -68,14 +75,17 @@ astarte.Source = L.Class.extend({
 		}
 		
 		marker.addEventListener("click", function(){
-			if(this.options["info-bubble"]){
+			
+			var infoB = astarte.util.findFirstObjNetwork(this, ["broker", "map", "info_bubble"]);
+			
+			if(infoB){
 				
 				var props = data;
 				props.genTime = genTime;
 				props.lat = lat;
 				props.lng = lng;
 				
-				this.options["info-bubble"].setContent(this._deviceMac, props);
+				infoB.setContent(this._deviceMac, props);
 				
 			}
 		}, this);

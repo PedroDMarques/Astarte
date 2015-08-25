@@ -13,9 +13,17 @@ astarte.Map = L.mapbox.Map.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(DOMid, mapId, options){
+	objNetwork: {
+		"broker" : null,
+		"info_bubble" : null,
+	},
+	
+	// -----------------------------------------------------------------
+	initialize: function(DOMid, mapId, objNetwork, options){
 		
 		L.mapbox.Map.prototype.initialize.call(this, DOMid, mapId, options);
+		
+		$.extend(this.objNetwork, objNetwork);
 		
 		this._dataLayers = {};
 		

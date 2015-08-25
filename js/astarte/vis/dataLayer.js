@@ -9,14 +9,13 @@ astarte.DataLayer = L.LayerGroup.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(map, broker, filter, options){
+	initialize: function(map, filter, options){
 		
 		L.LayerGroup.prototype.initialize.call(this, []);
 		
 		this.setOptions(options);
 		
 		this._Amap = map;
-		this._broker = broker;
 		this._filter = filter;
 		
 		this._visible = true;
