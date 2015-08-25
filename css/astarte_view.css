@@ -14,3 +14,26 @@
 	top: 0;
 	left: 0;
 }
+
+#info-bubble{
+	position: absolute;
+	width: 400px;
+	right: 20px;
+	bottom: 20px;
+	border-radius: 20px;
+	background-color: white;
+	padding: 10px;
+	display: none;
+}
+
+#info-bubble h3{
+	margin: 0;
+}
+
+#info-bubble hr{
+	color: black;
+	border-color: black;
+	height: 4px;
+	margin: 0;
+	margin-bottom: 10px;
+}

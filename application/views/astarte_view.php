@@ -44,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/broker.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/filter.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/infoBubble.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 	
@@ -53,6 +54,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<div id="wrapper">
 			<div id="map"></div>
+		</div>
+
+		<div id="info-bubble">
 		</div>
 
 		<script src="<?php echo base_url();?>js/astarte_view.js"></script>

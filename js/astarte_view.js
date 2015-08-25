@@ -4,7 +4,11 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"contextmenu" : true,
 }).setView([38.71297, -9.15977], 15);
 
-var broker = new astarte.Broker({});
+var infoBubble = new astarte.InfoBubble("info-bubble", {});
+
+var broker = new astarte.Broker({
+	"info-bubble" : infoBubble,
+});
 var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer(map, broker, filter, {});
 

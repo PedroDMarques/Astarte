@@ -6,6 +6,8 @@ astarte.Source = L.Class.extend({
 	// -----------------------------------------------------------------
 	options: {
 		
+		"info_bubble" : null,
+		
 		"marker_create_function" : astarte.markerCreator.createMarker,
 		
 	},
@@ -65,6 +67,19 @@ astarte.Source = L.Class.extend({
 			i++;
 		}
 		
+		marker.addEventListener("click", function(){
+			if(this.options["info-bubble"]){
+				
+				var props = data;
+				props.genTime = genTime;
+				props.lat = lat;
+				props.lng = lng;
+				
+				this.options["info-bubble"].setContent(this._deviceMac, props);
+				
+			}
+		}, this);
+		
 	},
 	
 	// -----------------------------------------------------------------
@@ -75,6 +90,11 @@ astarte.Source = L.Class.extend({
 	// -----------------------------------------------------------------
 	getFilteredMarkers: function(filter){
 		return filter.filterMany(this._markers);
-	}
+	},
+	
+	// -----------------------------------------------------------------
+	getUserType: function(){
+		return this._userType;	
+	},
 	
 });
