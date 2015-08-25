@@ -6,9 +6,12 @@ var broker = new astarte.Broker({
 
 var markerCreator = new astarte.MarkerCreator({});
 
+var timeline = new astarte.Timeline("timeline", {});
+
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
 	"marker_creator" : markerCreator,
+	"timeline" : timeline,
 	"info_bubble" : infoBubble,
 },{
 	"zoomControl" : false,

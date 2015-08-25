@@ -28,6 +28,9 @@ astarte.Broker = L.Class.extend({
 		// Holds all the sources available
 		this._sources = {}
 		
+		this._minFound = "9999";
+		this._maxFound = "0";
+		
 		return this;
 	},
 	
@@ -73,6 +76,18 @@ astarte.Broker = L.Class.extend({
 			"genTime" : genTime,
 			"data" : data,
 		});
+		
+		var timeline = astarte.util.findFirstObjNetwork(this, ["map", "timeline"]);
+		
+		if(genTime < this._minFound){
+			this._minFound = genTime;
+			timeline.setMin(genTime);
+		}
+		
+		if(genTime > this._maxFound){
+			this._maxFound = genTime;
+			timeline.setMax(genTime);
+		}
 		
 		return this;
 	},

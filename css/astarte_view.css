@@ -37,3 +37,10 @@
 	margin: 0;
 	margin-bottom: 10px;
 }
+
+#timeline{
+	position: absolute;
+	width: 400px;
+	top: 20px;
+	left: 20px;
+}

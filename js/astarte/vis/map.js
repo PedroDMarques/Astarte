@@ -16,6 +16,7 @@ astarte.Map = L.mapbox.Map.extend({
 	objNetwork: {
 		"broker" : null,
 		"marker_creator" : null,
+		"timeline" : null,
 		"info_bubble" : null,
 	},
 	

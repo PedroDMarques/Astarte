@@ -10,6 +10,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			Jquery
 		-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		
+		<!--
+			Jquery UI
+		-->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
 		<!--
 			Bootstrap
@@ -50,6 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/filter.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/infoBubble.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 	
@@ -63,6 +70,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<div id="info-bubble">
 		</div>
+		
+		<div id="timeline"></div>
 
 		<script src="<?php echo base_url();?>js/astarte_view.js"></script>
 
