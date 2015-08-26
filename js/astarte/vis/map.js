@@ -15,7 +15,6 @@ astarte.Map = L.mapbox.Map.extend({
 	// -----------------------------------------------------------------
 	objNet: {
 		"broker" : null,
-		"marker_creator" : null,
 		"timeline" : null,
 		"info_bubble" : null,
 	},
@@ -26,6 +25,7 @@ astarte.Map = L.mapbox.Map.extend({
 		this.setObjNet(objNet)
 		this._dataLayers = {};
 		this._setupContextMenu();
+		this.on("zoomend", function(event){console.log("current zoom = " + event.target._zoom);}, this);
 		return this;
 	},
 	
@@ -52,6 +52,10 @@ astarte.Map = L.mapbox.Map.extend({
 	// -----------------------------------------------------------------
 	toggleDataLayer: function(name){
 		this._dataLayers[name].toggle();
+		if(this._dataLayers[name].isVisible()){
+			var timeline = astarte.ffon(this, ["timeline"]);
+			this._dataLayers[name].redraw(timeline.getCurMin(), timeline.getCurMax());
+		}
 		return this;
 	},
 	

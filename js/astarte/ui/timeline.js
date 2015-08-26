@@ -32,8 +32,8 @@ astarte.Timeline = L.Class.extend({
 			var minTime = new Date(timeline._min + (interval * ui.values[0] / 100));
             var maxTime = new Date(timeline._min + (interval * ui.values[1] / 100));
 			
-            var minTimeFormat = minTime.getFullYear() + "-" + (minTime.getMonth() + 1) + "-" + minTime.getDate() + " " + minTime.getHours() + ":" + minTime.getMinutes() + ":" + minTime.getSeconds(); 
-            var maxTimeFormat = maxTime.getFullYear() + "-" + (maxTime.getMonth() + 1) + "-" + maxTime.getDate() + " " + maxTime.getHours() + ":" + maxTime.getMinutes() + ":" + maxTime.getSeconds();
+            var minTimeFormat = astarte.util.dateToString(minTime); 
+            var maxTimeFormat = astarte.util.dateToString(maxTime);
 			
 			timeline._curMin = minTimeFormat;
 			timeline._curMax = maxTimeFormat;
@@ -89,6 +89,6 @@ astarte.Timeline = L.Class.extend({
 	setObjNet: function(obj){
 		$.extend(this.objNet, obj);
 		return this;
-	}
+	},
 	
 });

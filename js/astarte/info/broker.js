@@ -96,8 +96,8 @@ astarte.Broker = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	getUserType: function(deviceMac){
-		return this._sources[deviceMac].getUserType();
+	getSource: function(deviceMac){
+		return this._sources[deviceMac];	
 	},
 	
 	// -----------------------------------------------------------------

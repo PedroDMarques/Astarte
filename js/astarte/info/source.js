@@ -25,7 +25,7 @@ astarte.Source = L.Class.extend({
 		this._userType = userType;
 		
 		// Holds basic information as well as being markers that can be drawn (have marker.lat, marker.lng, marker.genTime)
-		this._markers = [];
+		this._locations = [];
 		// Holds all data from each location (maps genTime -> data)
 		this._locationData = {};
 		
@@ -44,119 +44,52 @@ astarte.Source = L.Class.extend({
 		// Store the data immediately
 		this._locationData[genTime] = data;
 		
-		// Get a marker made
-		var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
-		
-		var marker = L.marker([lat, lng], {
-			"riseOnHover" : true,
-		});
-		
-		marker.genTime = genTime;
-		marker.highlighted = false;
-		
-		marker.setIcon(markerCreator.createIcon(marker, data));
+		var locObj = {
+			"lat" : lat,
+			"lng" : lng,
+			"genTime" : genTime,
+		};
 		
 		// Order the marker into this._markers
 		var added = false;
 		var i = 0;
 		
 		while(!added){
-			if(i === this._markers.length){
-				this._markers.push(marker);
+			if(i === this._locations.length){
+				this._locations.push(locObj);
 				added = true;
-			}else if(genTime <= this._markers[i].genTime){
-				this._markers.splice(i, 0, marker);
+			}else if(genTime <= this._locations[i].genTime){
+				this._locations.splice(i, 0, locObj);
 				added = true;
 			}
 			i++;
 		}
 		
-		marker.addEventListener("click", this._infoBubbleEvent, this);
-		marker.addEventListener("click", this.highlightMarkers, this);
-		
 	},
 	
 	// -----------------------------------------------------------------
-	getAllMarkers: function(){
-		return this._markers;
-	},
-	
-	// -----------------------------------------------------------------
-	getFilteredMarkers: function(filter){
-		return filter.filterMany(this._markers);
+	getAllLocations: function(){
+		return this._locations;
 	},
 	
 	// -----------------------------------------------------------------
 	getUserType: function(){
 		return this._userType;	
 	},
-	
-	// -----------------------------------------------------------------
-	highlightMarkers: function(){
-		
-		for(var i = 0; i < this._markers.length; i++){
-			var marker = this._markers[i];
-			
-			marker.highlighted = true;
-			
-			var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
-			
-			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
-		}
-		
-		var map = astarte.ffon(this, ["broker", "map"]);
-		map.addEventListener("click", this.removeHighlight, this);
-		
-		return this;
-		
-	},
-	
-	// -----------------------------------------------------------------
-	removeHighlight: function(){
-		
-		for(var i = 0; i < this._markers.length; i++){
-			var marker = this._markers[i];
-			
-			marker.highlighted = false;
-			
-			var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
-			
-			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
-		}
-		return this;
-		
-	},
-	
-	// -----------------------------------------------------------------
-	_infoBubbleEvent: function(event){
-		var marker = event.target;
-		var infoB = astarte.ffon(this, ["broker", "map", "info_bubble"]);
-			
-		if(infoB){
-			
-			var props = this._locationData[marker.genTime];
-			props.genTime = marker.genTime;
-			props.lat = marker.getLatLng().lat;
-			props.lng = marker.getLatLng().lng;
-			
-			infoB.setContent(this._deviceMac, props);
-			
-		}
-	},
-	
+
 	// -----------------------------------------------------------------
 	getLatestInfo: function(minTime, maxTime){
 		var toRet = null;
-		for(var i = this._markers.length - 1; i > -1; i--){
-			var marker = this._markers[i];
-			if(marker.genTime <= maxTime && marker.genTime >= minTime){
-				toRet = this._locationData[marker.genTime];
-				toRet.genTime = marker.genTime;
-				toRet.lat = marker.getLatLng().lat;
-				toRet.lng = marker.getLatLng().lng;
+		for(var i = this._locations.length - 1; i > -1; i--){
+			var locObj = this._locations[i];
+			if(locObj.genTime <= maxTime && locObj.genTime >= minTime){
+				toRet = this._locationData[locObj.genTime];
+				toRet.genTime = locObj.genTime;
+				toRet.lat = locObj.lat;
+				toRet.lng = locObj.lng;
 				break;
 				
-			}else if(marker.genTime < minTime){
+			}else if(locObj.genTime < minTime){
 				break;
 			}
 		}

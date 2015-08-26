@@ -38,7 +38,6 @@ astarte.DataLayer = L.LayerGroup.extend({
 		this._visible = !this._visible;
 		if(this._visible){
 			map.addLayer(this);
-			this.redraw();
 		}else{
 			map.removeLayer(this);
 		}

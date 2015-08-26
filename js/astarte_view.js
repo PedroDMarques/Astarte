@@ -10,7 +10,6 @@ var analizer = new astarte.ValAnalizer({}, {});
 
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
-	"marker_creator" : markerCreator,
 	"timeline" : timeline,
 	"info_bubble" : infoBubble,
 },{
@@ -32,6 +31,7 @@ infoBubble.setObjNet({
 var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
+	"marker_creator" : markerCreator,
 	"filter" : filter,
 }, {});
 
