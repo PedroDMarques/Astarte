@@ -10,7 +10,8 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	
 	// -----------------------------------------------------------------
 	objNet: {
-		"marker_creator" : null,	
+		"marker_creator" : null,
+		"val_analizer" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -69,6 +70,13 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		});
 		
 		marker.genTime = obj.genTime;
+		marker.deviceMac = obj.deviceMac;
+		
+		var markerCreator = astarte.ffon(this, ["marker_creator"]);
+		var analizer = astarte.ffon(this, ["val_analizer"]);
+		var objVal = analizer.calculateVal(obj);
+		var worst = analizer.worstVal();
+		marker.setIcon(markerCreator.createIcon(objVal, worst));
 		
 		var markers = this._markers[obj.deviceMac];
 		var added = false;

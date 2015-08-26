@@ -29,7 +29,7 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 		
 		var data = [];
 		for(var deviceMac in sources){
-			var latest = sources[deviceMac].getLatestInfo("0", "9999");
+			var latest = sources[deviceMac].getLatestInfo(minTime, maxTime);
 			if(latest){
 				data.push([parseFloat(latest.lat), parseFloat(latest.lng), analizer.calculateVal(latest)]);
 			}
@@ -37,6 +37,7 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 		}
 		
 		this._heatmap.setData(data);
+		this._heatmap.update();
 		
 	}
 	

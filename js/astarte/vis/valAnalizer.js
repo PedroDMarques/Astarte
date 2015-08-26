@@ -6,9 +6,9 @@ astarte.ValAnalizer = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
-		"battery_value" : 5,
+		"battery_value" : 2,
 		"battery_ideal" : 100,
-		"heartbeat_value" : 10,
+		"heartbeat_value" : 4,
 		"heartbeat_ideal" : 180,
 		"movements_value" : 1,
 		"movements_ideal" : 3,
@@ -44,18 +44,23 @@ astarte.ValAnalizer = L.Class.extend({
 	calculateVal: function(obj){
 		var toRet = 0;
 		if(obj["battery"]){
-			toRet += (this.options["battery_ideal"] - parseInt(obj["battery"])) * this.options["battery_value"];	
+			toRet += parseInt(obj["battery"]) * this.options["battery_value"];	
 		}
 		if(obj["heartbeat"]){
-			toRet += (this.options["heartbeat_ideal"] - parseInt(obj["heartbeat"])) * this.options["heartbeat_value"];	
+			toRet += parseInt(obj["heartbeat"]) * this.options["heartbeat_value"];	
 		}
 		if(obj["movements"]){
-			toRet += (this.options["movements_ideal"] - parseInt(obj["movements"])) * this.options["movements_value"];	
+			toRet += parseInt(obj["movements"]) * this.options["movements_value"];	
 		}
 		if(obj["screen"]){
-			toRet += (this.options["screen_ideal"] - parseInt(obj["screen"])) * this.options["screen_value"];	
+			toRet += parseInt(obj["screen"]) * this.options["screen_value"];	
 		}
-		return toRet / 1000;
+		return toRet;
+	},
+	
+	// -----------------------------------------------------------------
+	worstVal: function(){
+		return 50;
 	}
 	
-})
+});

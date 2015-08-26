@@ -32,6 +32,7 @@ var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
 	"marker_creator" : markerCreator,
+	"val_analizer" : analizer,
 	"filter" : filter,
 }, {});
 
