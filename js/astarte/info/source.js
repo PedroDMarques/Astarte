@@ -100,6 +100,11 @@ astarte.Source = L.Class.extend({
 	setObjNet: function(obj){
 		$.extend(this.objNet, obj);
 		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	getLocationData: function(genTime){
+		return this._locationData[genTime];
 	}
 	
 });

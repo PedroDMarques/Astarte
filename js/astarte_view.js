@@ -4,7 +4,7 @@ var broker = new astarte.Broker({}, {});
 
 var markerCreator = new astarte.MarkerCreator({});
 
-var timeline = new astarte.Timeline("timeline", {});
+var timeline = new astarte.Timeline("timeline-container", {});
 
 var analizer = new astarte.ValAnalizer({}, {});
 

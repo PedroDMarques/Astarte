@@ -98,7 +98,7 @@ astarte.Broker = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	getSource: function(deviceMac){
-		return this._sources[deviceMac];	
+		return this._sources[deviceMac];
 	},
 	
 	// -----------------------------------------------------------------

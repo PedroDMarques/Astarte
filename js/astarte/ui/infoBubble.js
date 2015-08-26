@@ -57,7 +57,7 @@ astarte.InfoBubble = L.Class.extend({
 	setObjNet: function(obj){
 		$.extend(this.objNet, obj);
 		return this;
-	}
+	},
 	
 	
 });

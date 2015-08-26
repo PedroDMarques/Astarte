@@ -16,7 +16,13 @@ astarte.Timeline = L.Class.extend({
 	// -----------------------------------------------------------------
 	initialize: function(DOMid, options){
 		this.setOptions(options);
-		this._timeline = $("#"+DOMid).slider({
+		
+		this._DOMcontainer = $("#"+DOMid);
+		this._minDisplay = $("<p></p>").appendTo(this._DOMcontainer);
+		this._maxDisplay = $("<p></p>").appendTo(this._DOMcontainer);
+		this._timeline = $("<div id='timeline'></div>").appendTo(this._DOMcontainer);
+		
+		this._timeline.slider({
 			"range" : true,
 			"animate" : true,
 			"min" : 0,
@@ -37,6 +43,9 @@ astarte.Timeline = L.Class.extend({
 			
 			timeline._curMin = minTimeFormat;
 			timeline._curMax = maxTimeFormat;
+		
+			timeline._minDisplay.html("Min allowed time = " + timeline._curMin);
+			timeline._maxDisplay.html("Max allowed time = " + timeline._curMax);
 			
 			var map = astarte.ffon(timeline, ["map"]);
 			map.redraw(minTimeFormat, maxTimeFormat);
@@ -45,7 +54,10 @@ astarte.Timeline = L.Class.extend({
 		
 		this._curMin = "0";
 		this._curMax = "9999";
-				
+		
+		this._minDisplay.html("Min allowed time = " + this._curMin);
+		this._maxDisplay.html("Max allowed time = " + this._curMax);
+		
 		return this;
 	},
 	

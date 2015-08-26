@@ -22,6 +22,9 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		this._markers = {};
 		this._clusterGroups = {};
 		
+		this._highlightConnection = null;
+		this._lastHighlightedDeviceMac = null;
+		
 		astarte.ffon(this, ["map", "broker"]).addEventListener("source_added", this.addSource, this);
 		astarte.ffon(this, ["map", "broker"]).addEventListener("location_added", this.addLocation, this);
 		
@@ -71,12 +74,17 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		
 		marker.genTime = obj.genTime;
 		marker.deviceMac = obj.deviceMac;
+		marker.highlighted = false;
 		
 		var markerCreator = astarte.ffon(this, ["marker_creator"]);
 		var analizer = astarte.ffon(this, ["val_analizer"]);
 		var objVal = analizer.calculateVal(obj);
 		var worst = analizer.worstVal();
 		marker.setIcon(markerCreator.createIcon(objVal, worst));
+		
+		marker.addEventListener("click", function(event){
+			this.highlightMarkers(event.target.deviceMac, event.target.genTime);
+		}, this);
 		
 		var markers = this._markers[obj.deviceMac];
 		var added = false;
@@ -129,7 +137,67 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		var broker = astarte.ffon(this, ["map", "broker"]);
 		var userType = broker.getSource(deviceMac).getUserType();
 		return this._clusterGroups[userType];
-	}
+	},
 	
+	// -----------------------------------------------------------------
+	highlightMarkers: function(deviceMac, genTime){
+		if(this._lastHighlightedDeviceMac){
+			this.removeHighlight(this._lastHighlightedDeviceMac);	
+		}
+		
+		this._highlightConnection = new L.Polyline([],{
+			"color" : "black",
+			"opacity" : 1,
+		});
+		
+		var markers = this._markers[deviceMac];
+		var cg = this._getUserCG(deviceMac);
+		for(var i = 0; i < markers.length; i++){
+			var marker = markers[i];
+			if(cg.hasLayer(marker)){
+				var icon = L.mapbox.marker.icon({
+					"marker-size" : "large",
+					"marker-symbol" : "pitch",
+					"marker-color" : "#aa0",
+				});
+				marker.setIcon(icon);
+				marker.highlighted = true;
+				this._highlightConnection.addLatLng(marker.getLatLng());
+			}
+			
+		}
+		this._lastHighlightedDeviceMac = deviceMac;
+		
+		this.addLayer(this._highlightConnection);
+		
+		var infoBubble = astarte.ffon(this, ["map", "info_bubble"]);
+		var broker = astarte.ffon(this, ["map", "broker"]);
+		var dataToDisplay = broker.getSource(deviceMac).getLocationData(genTime);
+		infoBubble.setContent(deviceMac, dataToDisplay);
+		
+	},
+	
+	// -----------------------------------------------------------------
+	removeHighlight: function(deviceMac){
+		
+		var markers = this._markers[deviceMac];
+		
+		var markerCreator = astarte.ffon(this, ["marker_creator"]);
+		var analizer = astarte.ffon(this, ["val_analizer"]);
+		var broker = astarte.ffon(this, ["map", "broker"]);
+		
+		for(var i = 0; i < markers.length; i++){
+			var marker = markers[i];
+			if(marker.highlighted){
+				var data = broker.getSource(deviceMac).getLocationData(marker.genTime);
+				var objVal = analizer.calculateVal(data);
+				var worst = analizer.worstVal();
+				marker.setIcon(markerCreator.createIcon(objVal, worst));
+				marker.highlighted = false;
+			}
+		}
+		
+		this.removeLayer(this._highlightConnection);
+	}
 	
 });

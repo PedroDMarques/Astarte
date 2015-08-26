@@ -74,7 +74,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="info-bubble">
 		</div>
 		
-		<div id="timeline"></div>
+		<div id="timeline-container">
+		</div>
 
 		<script src="<?php echo base_url();?>js/astarte_view.js"></script>
 
