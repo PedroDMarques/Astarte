@@ -37,6 +37,13 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 			this._clusterGroups[name] = new L.MarkerClusterGroup({
 				"maxClusterRadius" : 40,
 				"disableClusteringAtZoom" : 20,
+				"iconCreateFunction" : function(cluster){
+					return L.mapbox.marker.icon({
+						"marker-size" : "large",
+						"marker-symbol" : "circle",
+						"marker-color" : "#22b",
+					});
+				}
 			});
 			this.addLayer(this._clusterGroups[name]);
 		}
