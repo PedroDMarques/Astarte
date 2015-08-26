@@ -9,6 +9,11 @@ astarte.InfoBubble = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
+	objNet: {
+		"map" : null,
+	},
+	
+	// -----------------------------------------------------------------
 	initialize: function(DOMid, options){
 		this.setOptions(options);
 		
@@ -46,6 +51,13 @@ astarte.InfoBubble = L.Class.extend({
 			this._DOMele.css("display", "none");
 		}
 		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
+		return this;
 	}
+	
 	
 });

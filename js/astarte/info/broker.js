@@ -14,17 +14,15 @@ astarte.Broker = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	objNetwork: {
-		
+	objNet: {
 		"map" : null,
-		
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(options){
+	initialize: function(objNet, options){
 		
 		this.setOptions(options);
-		
+		this.setObjNet(objNet);
 		// Holds all the sources available
 		this._sources = {}
 		
@@ -77,7 +75,7 @@ astarte.Broker = L.Class.extend({
 			"data" : data,
 		});
 		
-		var timeline = astarte.util.findFirstObjNetwork(this, ["map", "timeline"]);
+		var timeline = astarte.ffon(this, ["map", "timeline"]);
 		
 		if(genTime < this._minFound){
 			this._minFound = genTime;
@@ -103,9 +101,8 @@ astarte.Broker = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	setMap: function(map){
-		this.objNetwork["map"] = map;
-		return this;
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
 	}
 	
 })

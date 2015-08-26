@@ -9,35 +9,34 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(map, filter, options){
-		astarte.DataLayer.prototype.initialize.call(this, map, filter, options);
-		
+	initialize: function(objNet, options){
+		astarte.DataLayer.prototype.initialize.call(this, objNet, options);
 		this._heatmap = new L.TileLayer.WebGLHeatMap({
 			"size" : 800,
 			"autoresize" : true,
 			"opacity" : 0.7,
 		});
 		this.addLayer(this._heatmap);
-		
 		return this;
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(){
+	redraw: function(minTime, maxTime){
+		var analizer = astarte.ffon(this, ["val_analizer"]);
 		
-		this._heatmap.clearData();
-		
-		var broker = this._Amap.objNetwork["broker"];
+		var broker = astarte.ffon(this, ["map", "broker"]);
 		var sources = broker.getSources();
 		
+		var data = [];
 		for(var deviceMac in sources){
-			
-			var latest = sources[deviceMac].getLatestInfo();
-			this._heatmap.addDataPoint(parseFloat(latest.lat), parseFloat(latest.lng), Math.random() * 100);
+			var latest = sources[deviceMac].getLatestInfo("0", "9999");
+			if(latest){
+				data.push([parseFloat(latest.lat), parseFloat(latest.lng), analizer.calculateVal(latest)]);
+			}
 			
 		}
 		
-		this._heatmap.update();
+		this._heatmap.setData(data);
 		
 	}
 	

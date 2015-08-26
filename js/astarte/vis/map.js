@@ -13,7 +13,7 @@ astarte.Map = L.mapbox.Map.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	objNetwork: {
+	objNet: {
 		"broker" : null,
 		"marker_creator" : null,
 		"timeline" : null,
@@ -21,16 +21,11 @@ astarte.Map = L.mapbox.Map.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(DOMid, mapId, objNetwork, options){
-		
+	initialize: function(DOMid, mapId, objNet, options){
 		L.mapbox.Map.prototype.initialize.call(this, DOMid, mapId, options);
-		
-		$.extend(this.objNetwork, objNetwork);
-		
+		this.setObjNet(objNet)
 		this._dataLayers = {};
-		
 		this._setupContextMenu();
-		
 		return this;
 	},
 	
@@ -62,13 +57,12 @@ astarte.Map = L.mapbox.Map.extend({
 	
 	// -----------------------------------------------------------------
 	redraw: function(minTime, maxTime){
-		var timeline = astarte.util.findFirstObjNetwork(this, ["timeline"]);
+		var timeline = astarte.ffon(this, ["timeline"]);
 		minTime = minTime || timeline.getCurMin();
 		maxTime = maxTime || timeline.getCurMax();
-		console.log("Redrawing Map, minTime = " + minTime + " --- maxTime = " + maxTime);
 		for(var dl in this._dataLayers){
 			if(this._dataLayers[dl].isVisible()){
-				this._dataLayers[dl].redraw();
+				this._dataLayers[dl].redraw(minTime, maxTime);
 			}
 		}
 		return this;
@@ -109,6 +103,12 @@ astarte.Map = L.mapbox.Map.extend({
 	//-----------------------------------------------------------------------------
 	getDataLayer: function(name){
 		return this._dataLayers[name];
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
+		return this;
 	}
 	
 });

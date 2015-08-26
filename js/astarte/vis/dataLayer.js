@@ -9,17 +9,17 @@ astarte.DataLayer = L.LayerGroup.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(map, filter, options){
-		
+	objNet: {
+		"map" : null,
+		"filter" : null,
+	},
+	
+	// -----------------------------------------------------------------
+	initialize: function(objNet, options){
 		L.LayerGroup.prototype.initialize.call(this, []);
-		
 		this.setOptions(options);
-		
-		this._Amap = map;
-		this._filter = filter;
-		
+		this.setObjNet(objNet);
 		this._visible = true;
-		
 		return this;
 	},
 	
@@ -34,12 +34,13 @@ astarte.DataLayer = L.LayerGroup.extend({
 	
 	// -----------------------------------------------------------------
 	toggle: function(){
+		var map = this.objNet["map"];
 		this._visible = !this._visible;
 		if(this._visible){
-			this._Amap.addLayer(this);
+			map.addLayer(this);
 			this.redraw();
 		}else{
-			this._Amap.removeLayer(this);
+			map.removeLayer(this);
 		}
 		return this;
 	},
@@ -47,6 +48,12 @@ astarte.DataLayer = L.LayerGroup.extend({
 	// -----------------------------------------------------------------
 	isVisible: function(){
 		return this._visible;
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
+		return this;
 	}
 	
 });

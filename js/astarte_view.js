@@ -1,12 +1,12 @@
 var infoBubble = new astarte.InfoBubble("info-bubble", {});
 
-var broker = new astarte.Broker({
-	"info-bubble" : infoBubble,
-});
+var broker = new astarte.Broker({}, {});
 
 var markerCreator = new astarte.MarkerCreator({});
 
 var timeline = new astarte.Timeline("timeline", {});
+
+var analizer = new astarte.ValAnalizer({}, {});
 
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
@@ -19,15 +19,29 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"contextmenu" : true,
 }).setView([38.71297, -9.15977], 15);
 
-broker.setMap(map);
-timeline.setMap(map);
+broker.setObjNet({
+	"map" : map,
+});
+timeline.setObjNet({
+	"map" : map,
+});
+infoBubble.setObjNet({
+	"map" : map,
+});
 
 var filter = new astarte.Filter({});
-var markerLayer = new astarte.MarkerLayer(map, filter, {});
+var markerLayer = new astarte.MarkerLayer({
+	"map" : map,
+	"filter" : filter,
+}, {});
 
 map.addDataLayer("markers", markerLayer);
 
-var heatLayer = new astarte.HeatLayer(map, filter, {});
+var heatLayer = new astarte.HeatLayer({
+	"map" : map,
+	"filter" : filter,
+	"val_analizer" : analizer,
+}, {});
 
 map.addDataLayer("heatmap", heatLayer);
 

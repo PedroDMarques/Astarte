@@ -1,5 +1,6 @@
 /*global astarte*/
 /*global L*/
+/*global $*/
 
 astarte.Source = L.Class.extend({
 	
@@ -9,18 +10,16 @@ astarte.Source = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	objNetwork: {
-		
+	objNet: {
 		"broker" : null,
-		
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(deviceMac, userType, objNetwork, options){
+	initialize: function(deviceMac, userType, objNet, options){
 		
 		this.setOptions(options);
 	
-		$.extend(this.objNetwork, objNetwork);
+		this.setObjNet(objNet);
 	
 		this._deviceMac = deviceMac;
 		this._userType = userType;
@@ -46,7 +45,7 @@ astarte.Source = L.Class.extend({
 		this._locationData[genTime] = data;
 		
 		// Get a marker made
-		var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+		var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
 		
 		var marker = L.marker([lat, lng], {
 			"riseOnHover" : true,
@@ -100,12 +99,12 @@ astarte.Source = L.Class.extend({
 			
 			marker.highlighted = true;
 			
-			var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+			var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
 			
 			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
 		}
 		
-		var map = astarte.util.findFirstObjNetwork(this, ["broker", "map"]);
+		var map = astarte.ffon(this, ["broker", "map"]);
 		map.addEventListener("click", this.removeHighlight, this);
 		
 		return this;
@@ -120,7 +119,7 @@ astarte.Source = L.Class.extend({
 			
 			marker.highlighted = false;
 			
-			var markerCreator = astarte.util.findFirstObjNetwork(this, ["broker", "map", "marker_creator"]);
+			var markerCreator = astarte.ffon(this, ["broker", "map", "marker_creator"]);
 			
 			marker.setIcon(markerCreator.createIcon(marker, this._locationData[marker.genTime]));
 		}
@@ -131,7 +130,7 @@ astarte.Source = L.Class.extend({
 	// -----------------------------------------------------------------
 	_infoBubbleEvent: function(event){
 		var marker = event.target;
-		var infoB = astarte.util.findFirstObjNetwork(this, ["broker", "map", "info_bubble"]);
+		var infoB = astarte.ffon(this, ["broker", "map", "info_bubble"]);
 			
 		if(infoB){
 			
@@ -146,16 +145,28 @@ astarte.Source = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	getLatestInfo: function(maxTime){
-		
-		var marker = astarte.util.lastInArr(this._markers);
-		
-		var toRet = this._locationData[marker.genTime];
-		toRet.genTime = marker.genTime;
-		toRet.lat = marker.getLatLng().lat;
-		toRet.lng = marker.getLatLng().lng;
-		
+	getLatestInfo: function(minTime, maxTime){
+		var toRet = null;
+		for(var i = this._markers.length - 1; i > -1; i--){
+			var marker = this._markers[i];
+			if(marker.genTime <= maxTime && marker.genTime >= minTime){
+				toRet = this._locationData[marker.genTime];
+				toRet.genTime = marker.genTime;
+				toRet.lat = marker.getLatLng().lat;
+				toRet.lng = marker.getLatLng().lng;
+				break;
+				
+			}else if(marker.genTime < minTime){
+				break;
+			}
+		}
 		return toRet;
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
+		return this;
 	}
 	
 });

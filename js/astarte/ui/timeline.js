@@ -9,7 +9,7 @@ astarte.Timeline = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	objNetwork: {
+	objNet: {
 		"map" : null,
 	},
 	
@@ -31,14 +31,14 @@ astarte.Timeline = L.Class.extend({
 			
 			var minTime = new Date(timeline._min + (interval * ui.values[0] / 100));
             var maxTime = new Date(timeline._min + (interval * ui.values[1] / 100));
-            
-            var minTimeFormat = minTime.toJSON().slice(0, 10) + " " + minTime.toJSON().slice(11, 19);
-            var maxTimeFormat = maxTime.toJSON().slice(0, 10) + " " + maxTime.toJSON().slice(11, 19);
+			
+            var minTimeFormat = minTime.getFullYear() + "-" + (minTime.getMonth() + 1) + "-" + minTime.getDate() + " " + minTime.getHours() + ":" + minTime.getMinutes() + ":" + minTime.getSeconds(); 
+            var maxTimeFormat = maxTime.getFullYear() + "-" + (maxTime.getMonth() + 1) + "-" + maxTime.getDate() + " " + maxTime.getHours() + ":" + maxTime.getMinutes() + ":" + maxTime.getSeconds();
 			
 			timeline._curMin = minTimeFormat;
 			timeline._curMax = maxTimeFormat;
 			
-			var map = astarte.util.findFirstObjNetwork(timeline, ["map"]);
+			var map = astarte.ffon(timeline, ["map"]);
 			map.redraw(minTimeFormat, maxTimeFormat);
 			
 		});
@@ -83,6 +83,12 @@ astarte.Timeline = L.Class.extend({
 	// -----------------------------------------------------------------
 	getCurMax: function(){
 		return this._curMax;
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(obj){
+		$.extend(this.objNet, obj);
+		return this;
 	}
 	
 });
