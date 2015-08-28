@@ -78,19 +78,17 @@ astarte.Source = L.Class.extend({
 	},
 
 	// -----------------------------------------------------------------
-	getLatestInfo: function(minTime, maxTime){
+	getLatestInfo: function(curTime){
 		var toRet = null;
 		for(var i = this._locations.length - 1; i > -1; i--){
 			var locObj = this._locations[i];
-			if(locObj.genTime <= maxTime && locObj.genTime >= minTime){
+			if(locObj.genTime <= curTime){
 				toRet = this._locationData[locObj.genTime];
 				toRet.genTime = locObj.genTime;
 				toRet.lat = locObj.lat;
 				toRet.lng = locObj.lng;
 				break;
 				
-			}else if(locObj.genTime < minTime){
-				break;
 			}
 		}
 		return toRet;

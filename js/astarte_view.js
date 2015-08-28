@@ -4,7 +4,16 @@ var broker = new astarte.Broker({}, {});
 
 var markerCreator = new astarte.MarkerCreator({});
 
-var timeline = new astarte.Timeline("timeline-container", {});
+var timeline = new astarte.Timeline({}, {
+	"timeline" : "timeline",
+	"timeline_display" : "timeline-time",
+	"range" : "timeline-range",
+	"range_display_min" : "timeline-range-min",
+	"range_display_max" : "timeline-range-max",
+	"time_input" : "timeline-input",
+	"stop_btn" : "timeline-stop",
+	"play_btn" : "timeline-play",
+});
 
 var analizer = new astarte.ValAnalizer({}, {});
 

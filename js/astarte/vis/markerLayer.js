@@ -113,18 +113,23 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(minTime, maxTime){
+	redraw: function(curTime){
 		for(var deviceMac in this._markers){
 			var cg = this._getUserCG(deviceMac);
 			var markers = this._markers[deviceMac];
+			var foundLatest = false;
 			
-			for(var i = 0; i < markers.length; i++){
+			for(var i = markers.length - 1; i > -1; i--){
 				var marker = markers[i];
-				if(marker.genTime >= minTime && marker.genTime <= maxTime){
-					cg.addLayer(marker);
-				
-				}else{
+				if(foundLatest){
 					cg.removeLayer(marker);
+				}else{
+					if(marker.genTime <= curTime){
+						cg.addLayer(marker);
+						foundLatest = true;
+					}else{
+						cg.removeLayer(marker);
+					}
 				}
 			}
 			

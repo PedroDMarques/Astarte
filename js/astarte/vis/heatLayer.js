@@ -21,7 +21,7 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(minTime, maxTime){
+	redraw: function(curTime){
 		var analizer = astarte.ffon(this, ["val_analizer"]);
 		
 		var broker = astarte.ffon(this, ["map", "broker"]);
@@ -29,9 +29,9 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 		
 		var data = [];
 		for(var deviceMac in sources){
-			var latest = sources[deviceMac].getLatestInfo(minTime, maxTime);
+			var latest = sources[deviceMac].getLatestInfo(curTime);
 			if(latest){
-				data.push([parseFloat(latest.lat), parseFloat(latest.lng), analizer.calculateVal(latest)]);
+				data.push([parseFloat(latest.lat), parseFloat(latest.lng), Math.random()]);
 			}
 			
 		}

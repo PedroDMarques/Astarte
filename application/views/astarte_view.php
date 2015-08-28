@@ -45,6 +45,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>plugins/webgl-heatmap-leaflet-master/js/webgl-heatmap.js"></script>
 		<script src="<?php echo base_url();?>plugins/webgl-heatmap-leaflet-master/js/webgl-heatmap-leaflet.js"></script>
 		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		
 		<!--
 			Astarte
 		-->
@@ -63,6 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
 	
 	</head>
 
@@ -75,9 +78,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="info-bubble">
 		</div>
 		
-		<div id="timeline-container">
+		<div id="timeline-container" class="panel panel-default">
+			<div id="timeline-container-body" class="panel-body">
+				
+				<div id="timeline-top">
+					<span id="timeline-control" class="input-group input-group-sm">
+						<span class="input-group-btn">
+							<button id="timeline-stop" type="button" class="btn btn-default"><i class="fa fa-stop"></i></button>
+						</span>
+						<input id="timeline-input" type="text" class="form-control" maxlength="3"></input>
+						<span class="input-group-btn">
+							<button id="timeline-play" type="button" class="btn btn-default"><i class="fa fa-play"></i></button>
+						</span>
+					</span>
+					
+					<p id="timeline-time"></p>
+				</div>
+				
+				<div id="timeline"></div>
+				<div id="timeline-range"></div>
+				
+				<div id="timeline-bottom">
+					<p id="timeline-range-min"></p>
+					<p id="timeline-range-max"></p>
+				</div>
+			</div>
 		</div>
-
+		
 		<script src="<?php echo base_url();?>js/astarte_view.js"></script>
 
 	</body>
