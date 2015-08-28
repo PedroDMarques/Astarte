@@ -73,8 +73,9 @@ astarte.Broker = L.Class.extend({
 			"lat" : lat,
 			"lng" : lng,
 			"genTime" : genTime,
+			"data" : data,
 		}
-		$.extend(objToFire, data);
+		
 		this.fireEvent("location_added", objToFire);
 		
 		var timeline = astarte.ffon(this, ["map", "timeline"]);
