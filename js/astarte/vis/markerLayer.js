@@ -110,6 +110,10 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 			this.highlightDevice(event.target.deviceMac);
 		}, this);
 		
+		marker.addEventListener("click", function(event){
+			this.setInfoBubble(event.target);
+		}, this);
+		
 		return this;
 	},
 	
@@ -174,6 +178,40 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	removeHighlight: function(deviceMac){
 		
+	},
+	
+	// -----------------------------------------------------------------
+	setInfoBubble: function(marker){
+		var infoBubble = astarte.ffon(this, ["map", "info_bubble"]);
+		var broker = astarte.ffon(this, ["map", "broker"]);
+		
+		var obj = {
+			"deviceMac" : marker.deviceMac,
+			"marker" : marker,
+			"basicInfo" : {
+				"lat" : marker.getLatLng().lat,
+				"lng" : marker.getLatLng().lng,
+				"genTime" : marker.genTime,
+			},
+		}
+		
+		var source = broker.getSource(marker.deviceMac);
+		obj["dataGen"] = source.getLocationData(marker.genTime);
+		
+		infoBubble.setCurObj(obj);
+		
+	},
+	
+	// -----------------------------------------------------------------
+	panZoomToMarker: function(marker){
+		var cg = this._getMarkerCG(marker);
+		if(this.hasLayer(cg) && cg.hasLayer(marker)){
+			var map = astarte.ffon(this, ["map"]);
+			map.panTo(marker.getLatLng());
+			setTimeout(function(){
+				cg.zoomToShowLayer(marker, function(){});	
+			}, 250);
+		}
 	}
 	
 });

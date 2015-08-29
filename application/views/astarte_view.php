@@ -66,6 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
+		<link rel="stylesheet" href="<?php echo base_url();?>css/infoBubble.css">
 	
 	</head>
 
@@ -73,36 +74,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<div id="wrapper">
 			<div id="map"></div>
-		</div>
-
-		<div id="info-bubble">
-		</div>
 		
-		<div id="timeline-container" class="panel panel-default">
-			<div id="timeline-container-body" class="panel-body">
-				
-				<div id="timeline-top">
-					<span id="timeline-control" class="input-group input-group-sm">
-						<span class="input-group-btn">
-							<button id="timeline-stop" type="button" class="btn btn-default"><i class="fa fa-stop"></i></button>
-						</span>
-						<input id="timeline-input" type="text" class="form-control" maxlength="3"></input>
-						<span class="input-group-btn">
-							<button id="timeline-play" type="button" class="btn btn-default"><i class="fa fa-play"></i></button>
-						</span>
-					</span>
+		
+			<div id="timeline-container" class="panel panel-default">
+				<div id="timeline-container-body" class="panel-body">
 					
-					<p id="timeline-time"></p>
-				</div>
-				
-				<div id="timeline"></div>
-				<div id="timeline-range"></div>
-				
-				<div id="timeline-bottom">
-					<p id="timeline-range-min"></p>
-					<p id="timeline-range-max"></p>
+					<div id="timeline-top">
+						<span id="timeline-control" class="input-group input-group-sm">
+							<span class="input-group-btn">
+								<button id="timeline-stop" type="button" class="btn btn-default"><i class="fa fa-stop"></i></button>
+							</span>
+							<input id="timeline-input" type="text" class="form-control" maxlength="3"></input>
+							<span class="input-group-btn">
+								<button id="timeline-play" type="button" class="btn btn-default"><i class="fa fa-play"></i></button>
+							</span>
+						</span>
+						
+						<p id="timeline-time"></p>
+					</div>
+					
+					<div id="timeline"></div>
+					<div id="timeline-range"></div>
+					
+					<div id="timeline-bottom">
+						<p id="timeline-range-min"></p>
+						<p id="timeline-range-max"></p>
+					</div>
 				</div>
 			</div>
+			
+			<div id="info-bubble-container" class="panel panel-default">
+				<div class="panel-heading">
+					<h4 id="info-bubble-device-mac"></h4>
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Actions <span class="caret"></span></button>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li><a href="#" id="info-bubble-focus">Focus on marker</a></li>
+							<li><a href="#" id="info-bubble-pan">Pan to marker</a></li>
+							<li class="divider" role="separator"></li>
+							<li><a href="#" id="info-bubble-close">Close</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel-body">
+					<section>
+						<h3>Basic Information: </h3>
+						<ul id="info-bubble-basic-info-list">
+						</ul>
+					</section>
+					<section>
+						<h3>Data Generated: </h3>
+						<ul id="info-bubble-data-gen-list">
+						</ul>
+					</section>
+				</div>
+			</div>
+			
 		</div>
 		
 		<script src="<?php echo base_url();?>js/astarte_view.js"></script>

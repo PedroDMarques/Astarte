@@ -6,7 +6,14 @@ astarte.Timeline = L.Class.extend({
 
 	// -----------------------------------------------------------------
 	options: {
-		
+		"timeline" : null,
+		"timeline_display" : null,
+		"range" : null,
+		"range_display_min" : null,
+		"range_display_max" : null,
+		"time_input" : null,
+		"stop_btn" : null,
+		"play_btn" : null,
 	},
 	
 	// -----------------------------------------------------------------

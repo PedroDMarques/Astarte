@@ -1,4 +1,12 @@
-var infoBubble = new astarte.InfoBubble("info-bubble", {});
+var infoBubble = new astarte.InfoBubble({}, {
+	"container" : "info-bubble-container",
+	"device_mac_display" : "info-bubble-device-mac",
+	"basic_info_list" : "info-bubble-basic-info-list",
+	"data_gen_list" : "info-bubble-data-gen-list",
+	"info_bubble_close" : "info-bubble-close",
+	"info_bubble_pan" : "info-bubble-pan",
+	"info_bubble_focus" : "info-bubble-focus",
+});
 
 var broker = new astarte.Broker({}, {});
 

@@ -1,0 +1,50 @@
+#info-bubble-container{
+	position: absolute;
+	display: none;
+	width: 20%;
+	right: 20px;
+	bottom: 0;
+	background-color: rgba(20, 20, 20, 0.9);
+}
+
+#info-bubble-container .panel-heading{
+	background-color: rgba(40, 40, 40, 1);
+	color: white;
+	display: flex;
+	justify-content: space-between;
+}
+
+#info-bubble-container .panel-heading p{
+	align-self: center;
+}
+
+#info-bubble-container .panel-heading button{
+	color: black;
+}
+
+#info-bubble-container .panel-body{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#info-bubble-container .panel-body section{
+	padding: 0;
+	margin: 0;
+}
+
+#info-bubble-container .panel-body section h3{
+	color: white;
+}
+
+#info-bubble-container .panel-body section ul{
+	color: white;
+	list-style-type: none;
+	padding: 0;
+	padding-left: 10px;
+}
+
+#info-bubble-container .panel-body section ul li{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 4px;
+}
