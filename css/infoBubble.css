@@ -3,8 +3,9 @@
 	display: none;
 	width: 20%;
 	right: 20px;
-	bottom: 0;
+	top: 20px;
 	background-color: rgba(20, 20, 20, 0.9);
+	max-height: 40%;
 }
 
 #info-bubble-container .panel-heading{

@@ -45,6 +45,21 @@ infoBubble.setObjNet({
 	"map" : map,
 });
 
+var uiFilter = new astarte.UiFilter({}, {
+	"heartbeat_slider" : "filter-slider-heartbeat",
+	"heartbeat_display_min" : "filter-heartbeat-min",
+	"heartbeat_display_max" : "filter-heartbeat-max",
+	"battery_slider" : "filter-slider-battery",
+	"battery_display_min" : "filter-battery-min",
+	"battery_display_max" : "filter-battery-max",
+	"movements_slider" : "filter-slider-movements",
+	"movements_display_min" : "filter-movements-min",
+	"movements_display_max" : "filter-movements-max",
+	"screen_slider" : "filter-slider-screen",
+	"screen_display_min" : "filter-screen-min",
+	"screen_display_max" : "filter-screen-max",
+});
+
 var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
