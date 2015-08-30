@@ -121,6 +121,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	redraw: function(curTime){
 		
 		var markerCreator = astarte.ffon(this, ["marker_creator"]);
+		var filter = astarte.ffon(this, ["map", "filter"]);
 		
 		for(var deviceMac in this._markers){
 			var markers = this._markers[deviceMac];
@@ -136,10 +137,12 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 			}else{
 				for(var i = markers.length - 1; i > -1; i--){
 					var marker = markers[i];
+					var broker = astarte.ffon(this, ["map", "broker"]);
+					var data = broker.getSource(deviceMac).getLocationData(marker.genTime);
 					if(foundLatest){
 						cg.removeLayer(marker);
 					}else{
-						if(marker.genTime <= curTime){
+						if(marker.genTime <= curTime && filter.filter(data)){
 							var opacity = markerCreator.calculateOpacity(marker.genTime, curTime);
 							marker.setOpacity(opacity);
 							cg.addLayer(marker);

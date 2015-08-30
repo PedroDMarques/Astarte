@@ -25,16 +25,22 @@ var timeline = new astarte.Timeline({}, {
 
 var analizer = new astarte.ValAnalizer({}, {});
 
+var filter = new astarte.Filter({}, {});
+
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
 	"timeline" : timeline,
 	"info_bubble" : infoBubble,
+	"filter" : filter,
 },{
 	"zoomControl" : false,
 	"attributionControl" : false,
 	"contextmenu" : true,
 }).setView([38.71297, -9.15977], 15);
 
+filter.setObjNet({
+	"map" : map,
+});
 broker.setObjNet({
 	"map" : map,
 });
@@ -45,7 +51,9 @@ infoBubble.setObjNet({
 	"map" : map,
 });
 
-var uiFilter = new astarte.UiFilter({}, {
+var uiFilter = new astarte.UiFilter({
+	"map" : map,
+}, {
 	"heartbeat_slider" : "filter-slider-heartbeat",
 	"heartbeat_display_min" : "filter-heartbeat-min",
 	"heartbeat_display_max" : "filter-heartbeat-max",
@@ -60,19 +68,16 @@ var uiFilter = new astarte.UiFilter({}, {
 	"screen_display_max" : "filter-screen-max",
 });
 
-var filter = new astarte.Filter({});
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
 	"marker_creator" : markerCreator,
 	"val_analizer" : analizer,
-	"filter" : filter,
 }, {});
 
 map.addDataLayer("markers", markerLayer);
 
 var heatLayer = new astarte.HeatLayer({
 	"map" : map,
-	"filter" : filter,
 	"val_analizer" : analizer,
 }, {});
 

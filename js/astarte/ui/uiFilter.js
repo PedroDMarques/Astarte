@@ -22,7 +22,7 @@ astarte.UiFilter = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	objNet: {
-		
+		"map" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -159,6 +159,11 @@ astarte.UiFilter = L.Class.extend({
 		
 		minDisplay.html(slider.slider("values", 0));
 		maxDisplay.html(slider.slider("values", 1));
+		
+		var map = astarte.ffon(this, ["map"]);
+		var filter = astarte.ffon(this, ["map", "filter"]);
+		filter.changeMinMax(sliderType, parseInt(minDisplay.html()), parseInt(maxDisplay.html()));
+		map.redraw();
 		
 	},
 	

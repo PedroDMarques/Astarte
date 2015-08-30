@@ -17,6 +17,7 @@ astarte.Map = L.mapbox.Map.extend({
 		"broker" : null,
 		"timeline" : null,
 		"info_bubble" : null,
+		"filter" : null,
 	},
 	
 	// -----------------------------------------------------------------
