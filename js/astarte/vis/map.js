@@ -102,6 +102,26 @@ astarte.Map = L.mapbox.Map.extend({
 			"context" : this,
 		});
 		
+		this.contextmenu.addItem({
+			"separator" : true,
+		});
+		
+		this.contextmenu.addItem({
+			"text" : "Run Generator",
+			"callback" : function(){
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function(){
+					if(request.readyState === 4){
+						if(request.status === 200){
+							console.log(request.responseText);
+						}
+					}
+				}
+				request.open("get", "http://localhost/astarte/index.php/astarte_api/run_generator");
+				request.send();
+			},
+		})
+		
 	},
 	
 	//-----------------------------------------------------------------------------

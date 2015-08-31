@@ -52,5 +52,10 @@ class Astarte_api extends CI_Controller {
 	   echo json_encode($finalArray);
 
    }
+   
+   public function run_generator(){
+	   $handle = popen("java -jar DataGenerator.jar", "r");
+	   echo fread($handle, 24000);
+   }
 
 }

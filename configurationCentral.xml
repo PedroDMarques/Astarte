@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <data_configs>
+	<server>accessible</server>
     <gen_type>CENTRAL</gen_type>
     <lat>38.745851</lat>
     <lng>-9.182063</lng>
