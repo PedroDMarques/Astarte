@@ -24,6 +24,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 		<!--
+			Semantic
+		-->
+		<link rel="stylesheet" href="<?php echo base_url();?>semantic/semantic.min.css">
+		<script src="<?php echo base_url();?>semantic/semantic.min.js"></script>
+
+		<!--
 			Mapbox (and leaflet)
 		-->
 		<script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
@@ -61,13 +67,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/filter.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/webService.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/infoBubble.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
-		<link rel="stylesheet" href="<?php echo base_url();?>css/infoBubble.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/menu.css">
 	
 	</head>
@@ -75,8 +79,88 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<body>
 
 		<div id="wrapper">
+
 			<div id="map"></div>
-		
+			
+			<div id="side-menu">
+				
+				<!-- Info Bee -->
+				
+				<div class="ui segments">
+					<div class="ui raised segment">
+						<h2 class="ui header">
+							<i class="info icon"></i>
+							<div class="content">
+								Context Info
+							</div>
+						</h2>
+						<div class="ui segments">
+							<div class="ui segment">1</div>
+							<div class="ui segment">2</div>
+							<div class="ui segment">3</div>
+							<div class="ui segment">4</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Filters -->
+				
+				<div class="ui segments">
+					<div class="ui raised segment">
+						<h2 class="ui header">
+							<i class="filter icon"></i>
+							<div class="content">
+								Filters
+							</div>
+						</h2>
+						<div class="ui segments">
+							<div class="ui segment">1</div>
+							<div class="ui segment">2</div>
+							<div class="ui segment">3</div>
+							<div class="ui segment">4</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Options -->
+				
+				<div class="ui segments">
+					<div class="ui raised segment">
+						<h2 class="ui header">
+							<i class="settings icon"></i>
+							<div class="content">
+								Options
+							</div>
+						</h2>
+						<div class="ui segments">
+							<div class="ui segment">1</div>
+							<div class="ui segment">2</div>
+							<div class="ui segment">3</div>
+							<div class="ui segment">4</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Point Generation -->
+				
+				<div class="ui segments">
+					<div class="ui raised segment">
+						<h2 class="ui header">
+							<i class="wizard icon"></i>
+							<div class="content">
+								Point Generation
+							</div>
+						</h2>
+						<div class="ui segments">
+							<div class="ui segment">1</div>
+							<div class="ui segment">2</div>
+							<div class="ui segment">3</div>
+							<div class="ui segment">4</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
 		
 			<div id="timeline-container" class="panel panel-default">
 				<div id="timeline-container-body" class="panel-body">
@@ -102,33 +186,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<p id="timeline-range-min"></p>
 						<p id="timeline-range-max"></p>
 					</div>
-				</div>
-			</div>
-			
-			<div id="info-bubble-container" class="panel panel-default">
-				<div class="panel-heading">
-					<h4 id="info-bubble-device-mac"></h4>
-					<div class="dropdown">
-						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Actions <span class="caret"></span></button>
-						<ul class="dropdown-menu dropdown-menu-right">
-							<li><a href="#" id="info-bubble-focus">Focus on marker</a></li>
-							<li><a href="#" id="info-bubble-pan">Pan to marker</a></li>
-							<li class="divider" role="separator"></li>
-							<li><a href="#" id="info-bubble-close">Close</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="panel-body">
-					<section>
-						<h3>Basic Information: </h3>
-						<ul id="info-bubble-basic-info-list">
-						</ul>
-					</section>
-					<section>
-						<h3>Data Generated: </h3>
-						<ul id="info-bubble-data-gen-list">
-						</ul>
-					</section>
 				</div>
 			</div>
 			

@@ -1,13 +1,3 @@
-var infoBubble = new astarte.InfoBubble({}, {
-	"container" : "info-bubble-container",
-	"device_mac_display" : "info-bubble-device-mac",
-	"basic_info_list" : "info-bubble-basic-info-list",
-	"data_gen_list" : "info-bubble-data-gen-list",
-	"info_bubble_close" : "info-bubble-close",
-	"info_bubble_pan" : "info-bubble-pan",
-	"info_bubble_focus" : "info-bubble-focus",
-});
-
 var broker = new astarte.Broker({}, {});
 
 var markerCreator = new astarte.MarkerCreator({});
@@ -30,7 +20,6 @@ var filter = new astarte.Filter({}, {});
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
 	"timeline" : timeline,
-	"info_bubble" : infoBubble,
 	"filter" : filter,
 },{
 	"zoomControl" : false,
@@ -45,9 +34,6 @@ broker.setObjNet({
 	"map" : map,
 });
 timeline.setObjNet({
-	"map" : map,
-});
-infoBubble.setObjNet({
 	"map" : map,
 });
 

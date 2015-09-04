@@ -1,11 +1,12 @@
 #menu-container{
 	position: absolute;
 	width: 20%;
-	right: 20px;
+	left: 20px;
 	bottom: 0;
 	max-height: 56%;
 	height: 56%;
 	background-color: rgba(20, 20, 20, 0.9);
+	display: none;
 }
 
 #menu-container .panel-heading{
