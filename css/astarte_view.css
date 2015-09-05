@@ -29,3 +29,17 @@
 	border-left: 1px solid grey;
 	overflow: auto;
 }
+
+.segment-header{
+	cursor: hand;
+	cursor: pointer;
+}
+
+.segment-container{
+	margin-bottom: 20px;
+}
+
+.segment-body{
+	max-height: 600px;
+	overflow: auto;
+}

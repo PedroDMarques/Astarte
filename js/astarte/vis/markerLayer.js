@@ -33,8 +33,9 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	addClusterGroup: function(name){
 		if(!this._clusterGroups[name]){
-			this._clusterGroups[name] = new L.MarkerClusterGroup({
+			var cluster = new L.MarkerClusterGroup({
 				"maxClusterRadius" : 40,
+				"zoomToBoundsOnClick" : false,
 				"disableClusteringAtZoom" : 20,
 				"iconCreateFunction" : function(cluster){
 					return L.mapbox.marker.icon({
@@ -44,6 +45,16 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 					});
 				}
 			});
+			
+			var clusterClickFunc = function(e){
+				astarte.ffon(this, ["map", "infoB"]).setClusterInformation(e.layer.getAllChildMarkers());
+			}
+			
+			cluster.on("clusterclick", clusterClickFunc.bind(this));
+			cluster.on("clusterdblclick", function(e){
+				e.layer.zoomToBounds();
+			});
+			this._clusterGroups[name] = cluster; 
 			this.addLayer(this._clusterGroups[name]);
 		}
 		return this;

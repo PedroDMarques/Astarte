@@ -69,6 +69,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/webService.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/menuSegment.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/infoB.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
@@ -86,79 +88,88 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				<!-- Info Bee -->
 				
-				<div class="ui segments">
-					<div class="ui raised segment">
-						<h2 class="ui header">
-							<i class="info icon"></i>
-							<div class="content">
-								Context Info
+				<div id="info-b-segment" class="segment-container">
+					<div class="ui segments">
+						<div class="ui raised segment">
+							<h2 class="ui header segment-header">
+								<i class="info icon"></i>
+								<div class="content">
+									Context Info
+								</div>
+							</h2>
+							<div class="segment-body">
+								<div class="ui segments">
+									
+								</div>
 							</div>
-						</h2>
-						<div class="ui segments">
-							<div class="ui segment">1</div>
-							<div class="ui segment">2</div>
-							<div class="ui segment">3</div>
-							<div class="ui segment">4</div>
 						</div>
 					</div>
 				</div>
 				
 				<!-- Filters -->
 				
-				<div class="ui segments">
-					<div class="ui raised segment">
-						<h2 class="ui header">
-							<i class="filter icon"></i>
-							<div class="content">
-								Filters
+				<div id="filters-segment" class="segment-container">
+					<div class="ui segments">
+						<div class="ui raised segment">
+							<h2 class="ui header segment-header">
+								<i class="filter icon"></i>
+								<div class="content">
+									Filters
+								</div>
+							</h2>
+							<div class="segment-body">
+								<div class="ui segments">
+									<div class="ui segment">1</div>
+									<div class="ui segment">2</div>
+									<div class="ui segment">3</div>
+									<div class="ui segment">4</div>
+								</div>
 							</div>
-						</h2>
-						<div class="ui segments">
-							<div class="ui segment">1</div>
-							<div class="ui segment">2</div>
-							<div class="ui segment">3</div>
-							<div class="ui segment">4</div>
 						</div>
 					</div>
 				</div>
 				
 				<!-- Options -->
 				
-				<div class="ui segments">
-					<div class="ui raised segment">
-						<h2 class="ui header">
-							<i class="settings icon"></i>
-							<div class="content">
-								Options
+				<div id="options-segment" class="segment-container">
+					<div class="ui segments">
+						<div class="ui raised segment">
+							<h2 class="ui header segment-header">
+								<i class="settings icon"></i>
+								<div class="content">
+									Options
+								</div>
+							</h2>
+							<div class="segment-body">
+								<div class="ui segments">
+									<div class="ui segment">1</div>
+									<div class="ui segment">2</div>
+									<div class="ui segment">3</div>
+									<div class="ui segment">4</div>
+								</div>
 							</div>
-						</h2>
-						<div class="ui segments">
-							<div class="ui segment">1</div>
-							<div class="ui segment">2</div>
-							<div class="ui segment">3</div>
-							<div class="ui segment">4</div>
 						</div>
 					</div>
 				</div>
 				
 				<!-- Point Generation -->
 				
-				<div class="ui segments">
-					<div class="ui raised segment">
-						<h2 class="ui header">
-							<i class="wizard icon"></i>
-							<div class="content">
-								Point Generation
+				<div id="generator-segment" class="segment-container">
+					<div class="ui segments">
+						<div class="ui raised segment">
+							<h2 class="ui header segment-header">
+								<i class="wizard icon"></i>
+								<div class="content">
+									Point Generation
+								</div>
+							</h2>
+							<div class="segment-body">
+								<div class="ui segments">
+								</div>
 							</div>
-						</h2>
-						<div class="ui segments">
-							<div class="ui segment">1</div>
-							<div class="ui segment">2</div>
-							<div class="ui segment">3</div>
-							<div class="ui segment">4</div>
 						</div>
 					</div>
-				</div>
+				</div>	
 				
 			</div>
 		

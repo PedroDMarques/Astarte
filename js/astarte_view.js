@@ -1,5 +1,18 @@
 var broker = new astarte.Broker({}, {});
 
+var infoBSegment = new astarte.InfoB({}, {
+	"segment_id" : "info-b-segment",
+});
+var filtersSegment = new astarte.MenuSegment({}, {
+	"segment_id" : "filters-segment",
+});
+var optionsSegment = new astarte.MenuSegment({}, {
+	"segment_id" : "options-segment",
+});
+var generatorSegment = new astarte.MenuSegment({}, {
+	"segment_id" : "generator-segment",
+});
+
 var markerCreator = new astarte.MarkerCreator({});
 
 var timeline = new astarte.Timeline({}, {
@@ -21,6 +34,7 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
 	"timeline" : timeline,
 	"filter" : filter,
+	"infoB" : infoBSegment,
 },{
 	"zoomControl" : false,
 	"attributionControl" : false,
@@ -34,6 +48,9 @@ broker.setObjNet({
 	"map" : map,
 });
 timeline.setObjNet({
+	"map" : map,
+});
+infoBSegment.setObjNet({
 	"map" : map,
 });
 

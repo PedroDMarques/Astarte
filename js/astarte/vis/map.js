@@ -16,8 +16,8 @@ astarte.Map = L.mapbox.Map.extend({
 	objNet: {
 		"broker" : null,
 		"timeline" : null,
-		"info_bubble" : null,
 		"filter" : null,
+		"infoB" : null,
 	},
 	
 	// -----------------------------------------------------------------
