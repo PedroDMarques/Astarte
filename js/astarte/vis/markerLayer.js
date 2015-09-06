@@ -97,7 +97,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		var markerCreator = astarte.ffon(this, ["marker_creator"]);
 		
 		var val = analizer.calculateVal(obj.data);
-		var icon = markerCreator.createIcon(val, 10);
+		var icon = markerCreator.createIcon(val, 10, marker);
 		
 		marker.setIcon(icon);
 		
@@ -119,10 +119,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		// Events
 		marker.addEventListener("click", function(event){
 			this.highlightDevice(event.target.deviceMac);
-		}, this);
-		
-		marker.addEventListener("click", function(event){
-			this.setInfoBubble(event.target);
+			this.setInfoB(event.target);
 		}, this);
 		
 		return this;
@@ -195,25 +192,9 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	setInfoBubble: function(marker){
-		var infoBubble = astarte.ffon(this, ["map", "info_bubble"]);
-		var broker = astarte.ffon(this, ["map", "broker"]);
-		
-		var obj = {
-			"deviceMac" : marker.deviceMac,
-			"marker" : marker,
-			"basicInfo" : {
-				"lat" : marker.getLatLng().lat,
-				"lng" : marker.getLatLng().lng,
-				"genTime" : marker.genTime,
-			},
-		}
-		
-		var source = broker.getSource(marker.deviceMac);
-		obj["dataGen"] = source.getLocationData(marker.genTime);
-		
-		infoBubble.setCurObj(obj);
-		
+	setInfoB: function(marker){
+		var infoB = astarte.ffon(this, ["map", "infoB"]);
+		infoB.setMarkerInformation(marker);
 	},
 	
 	// -----------------------------------------------------------------
