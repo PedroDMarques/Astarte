@@ -5,7 +5,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
-		
+		"draw_all_markers_from_highlighted" : false,
 	},
 	
 	// -----------------------------------------------------------------
@@ -20,7 +20,9 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		
 		// Holds all the markers
 		this._markers = {};
-		this._highlightedDevice = null;
+		this._highlightedMarker = {};
+		this._highlightedConnection = null;
+		
 		this._clusterGroups = {};
 		
 		var broker = astarte.ffon(this, ["map", "broker"]);
@@ -47,6 +49,10 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 			});
 			
 			var clusterClickFunc = function(e){
+				this.removeHighlight();
+				this.setOptions({
+					"draw_all_markers_from_highlighted" : false,
+				});
 				astarte.ffon(this, ["map", "infoB"]).setClusterInformation(e.layer.getAllChildMarkers());
 			}
 			
@@ -116,8 +122,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		
 		// Events
 		marker.addEventListener("click", function(event){
-			this.highlightDevice(event.target.deviceMac);
-			this.setInfoB(event.target);
+			this.highlightDevice(event.target);
 		}, this);
 		
 		return this;
@@ -126,18 +131,49 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	redraw: function(curTime){
 		
+		if(!curTime){
+			var timeline = astarte.ffon(this, ["map", "timeline"]);
+			curTime = timeline.getCurTime();
+		}
+		
 		var markerCreator = astarte.ffon(this, ["marker_creator"]);
 		var filter = astarte.ffon(this, ["map", "filter"]);
+		
+		if(!this.options["draw_all_markers_from_highlighted"]){
+			if(this._highlightConnection){
+				this.removeLayer(this._highlightConnection);
+			}
+		}
 		
 		for(var deviceMac in this._markers){
 			var markers = this._markers[deviceMac];
 			var cg = this._getUserCG(deviceMac);
 			var foundLatest = false;
 			
-			if(this._highlightedDevice === deviceMac){
-				for(var i = 0; i < markers.length; i++){
-					var marker = markers[i];
-					cg.addLayer(marker);	
+			if(this._highlightedMarker.deviceMac === deviceMac){
+				if(this.options["draw_all_markers_from_highlighted"]){
+					if(this._highlightConnection){
+						this.removeLayer(this._highlightConnection);
+					}
+					this._highlightConnection = L.polyline({});
+					this.addLayer(this._highlightConnection);
+					for(var i = 0; i < markers.length; i++){
+						var marker = markers[i];
+						cg.addLayer(marker);
+						this._highlightConnection.addLatLng(marker.getLatLng());
+					}
+				}else{
+					if(this._highlightConnection){
+						this.removeLayer(this._highlightConnection);
+					}
+					for(var i = 0; i < markers.length; i++){
+						var marker = markers[i];
+						if(marker === this._highlightedMarker){
+							cg.addLayer(marker);
+						}else{
+							cg.removeLayer(marker);
+						}
+					}
 				}
 				
 			}else{
@@ -178,21 +214,55 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	highlightDevice: function(deviceMac){
-		this._highlightedDevice = deviceMac;
+	highlightDevice: function(marker){
+		if(this._highlightedMarker["deviceMac"]){
+			if(this._highlightedMarker.deviceMac !== marker.deviceMac){
+				this.setOptions({
+					"draw_all_markers_from_highlighted" : false,
+				});
+			}
+			this.removeHighlight();	
+		}
+		var markerCreator = astarte.ffon(this, ["marker_creator"]);
+		var analizer = astarte.ffon(this, ["val_analizer"]);
+		var broker = astarte.ffon(this, ["map", "broker"]);
+		var data = broker.getSource(marker.deviceMac).getLocationData(marker.genTime);
+		var value = analizer.calculateVal(data);
+		markerCreator.setIcon(marker, value, 100, true);
+		this._highlightedMarker = marker;
+		this.setInfoB(marker);
 		var timeline = astarte.ffon(this, ["map", "timeline"]);
 		this.redraw(timeline.getCurTime());
 	},
 	
 	// -----------------------------------------------------------------
-	removeHighlight: function(deviceMac){
-		
+	removeHighlight: function(){
+		if(!this._highlightedMarker["deviceMac"]){
+			return;
+		}
+		var markerCreator = astarte.ffon(this, ["marker_creator"]);
+		var analizer = astarte.ffon(this, ["val_analizer"]);
+		var broker = astarte.ffon(this, ["map", "broker"]);
+		var data = broker.getSource(this._highlightedMarker.deviceMac).getLocationData(this._highlightedMarker.genTime);
+		var value = analizer.calculateVal(data);
+		markerCreator.setIcon(this._highlightedMarker, value, 100);
+		this._highlightedMarker = {};
 	},
 	
 	// -----------------------------------------------------------------
 	setInfoB: function(marker){
 		var infoB = astarte.ffon(this, ["map", "infoB"]);
 		infoB.setMarkerInformation(marker);
+	},
+	
+	// -----------------------------------------------------------------
+	toggleDrawConnections: function(){
+		if(this.options["draw_all_markers_from_highlighted"]){
+			this.options["draw_all_markers_from_highlighted"] = false;
+		}else{
+			this.options["draw_all_markers_from_highlighted"] = true;
+		}
+		this.redraw();
 	},
 	
 	// -----------------------------------------------------------------

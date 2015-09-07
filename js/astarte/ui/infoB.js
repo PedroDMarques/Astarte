@@ -102,17 +102,32 @@ astarte.InfoB = astarte.MenuSegment.extend({
 		var map = astarte.ffon(this, ["map"]);
 		var markerLayer = map.getDataLayer("markers");
 		
-		var focusBtn = $("<div class='ui button'>Focus</div>").appendTo(buttonGroup);
+		var focusBtn = $("<div class='ui icon button'><i class='large compress icon'></i></div>").appendTo(buttonGroup);
 		focusBtn.on("click", function(){
 			markerLayer.panZoomToMarker(marker);
 		});
 		
-		var panBtn = $("<div class='ui button'>Pan</div>").appendTo(buttonGroup);
+		var panBtn = $("<div class='ui icon button'><i class='large crosshairs icon'></i></div>").appendTo(buttonGroup);
 		panBtn.on("click", function(){
 			map.panTo(marker.getLatLng());
 		});
 		
-		var deselectBtn = $("<div class='ui button'>Deselect</div>").appendTo(buttonGroup);
+		var conBtn = $("<div class='ui icon button'><i class='large fork icon'></i></div>").appendTo(buttonGroup);
+		conBtn.on("click", function(){
+			markerLayer.toggleDrawConnections();
+		});
+		
+		var deselectBtn = $("<div class='ui icon button'><i class='large minus icon'></i></div>").appendTo(buttonGroup);
+		deselectBtn.on("click", (function(){
+			markerLayer.removeHighlight();
+			markerLayer.setOptions({
+				"draw_all_markers_from_highlighted" : false,
+			});
+			markerLayer.redraw();
+			this._title.html("Context Information");
+			this._bodySegments.html("");
+			this._close();
+		}).bind(this));
 		
 		this._open();
 		return this;
