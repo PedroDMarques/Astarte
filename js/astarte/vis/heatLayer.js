@@ -15,6 +15,7 @@ astarte.HeatLayer = astarte.DataLayer.extend({
 			"size" : 800,
 			"autoresize" : true,
 			"opacity" : 0.7,
+			"gradientTexture" : "http://localhost/astarte/fadedbar.png",
 		});
 		this.addLayer(this._heatmap);
 		return this;

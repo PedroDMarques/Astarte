@@ -97,9 +97,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		var markerCreator = astarte.ffon(this, ["marker_creator"]);
 		
 		var val = analizer.calculateVal(obj.data);
-		var icon = markerCreator.createIcon(val, 10, marker);
-		
-		marker.setIcon(icon);
+		markerCreator.setIcon(marker, val, 100);
 		
 		var markers = this._markers[obj.deviceMac];
 		var i = 0;

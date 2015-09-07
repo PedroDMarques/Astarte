@@ -16,17 +16,15 @@ astarte.MarkerCreator = L.Class.extend({
 	},
 	
 	//-----------------------------------------------------------------------------
-	createIcon: function(val, worst, marker){
+	setIcon: function(marker, val, worst){
 		var color = $.xcolor.gradientlevel(this.options["good_color"], this.options["bad_color"], val, worst).getHex();
 		var icon = L.mapbox.marker.icon({
 			"marker-size" : "medium",
 			"marker-symbol" : "pitch",
 			"marker-color" : color,
 		});
-		if(marker){
-			marker.color = color;
-		}
-		return icon;
+		marker.setIcon(icon);
+		marker.color = color;
 	},
 	
 	//-----------------------------------------------------------------------------

@@ -35,7 +35,7 @@ astarte.ValAnalizer = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	calculateVal: function(obj){
-		return Math.floor(Math.random() * 10) + 1;
+		return 100 - obj["battery"];
 	},
 	
 });
