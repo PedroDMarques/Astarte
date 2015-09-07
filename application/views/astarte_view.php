@@ -74,7 +74,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
-		<link rel="stylesheet" href="<?php echo base_url();?>css/menu.css">
 	
 	</head>
 
@@ -118,12 +117,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</h2>
 							<div class="segment-body">
-								<div class="ui segments">
-									<div class="ui segment">1</div>
-									<div class="ui segment">2</div>
-									<div class="ui segment">3</div>
-									<div class="ui segment">4</div>
+								
+								<div id="filter-slider-heartbeat"></div>
+								<div class="filter-value-container">
+									<span id="filter-heartbeat-min">13</span>
+									<span id="filter-heartbeat-max">13</span>
 								</div>
+								
+								<div id="filter-slider-battery"></div>
+								<div class="filter-value-container">
+									<span id="filter-battery-min">13</span>
+									<span id="filter-battery-max">13</span>
+								</div>
+								
+								<div id="filter-slider-movements"></div>
+								<div class="filter-value-container">
+									<span id="filter-movements-min">13</span>
+									<span id="filter-movements-max">13</span>
+								</div>
+								
+								<div id="filter-slider-screen"></div>
+								<div class="filter-value-container">
+									<span id="filter-screen-min">13</span>
+									<span id="filter-screen-max">13</span>
+								</div>
+								
 							</div>
 						</div>
 					</div>
@@ -196,58 +214,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div id="timeline-bottom">
 						<p id="timeline-range-min"></p>
 						<p id="timeline-range-max"></p>
-					</div>
-				</div>
-			</div>
-			
-			<div id="menu-container" class="panel panel-default">
-				<div class="panel-heading">
-					<ul class="nav nav-pills nav-justified">
-						<li role="presentation"><a href="#menu-tab-menu" data-toggle="tab">Menu</a></li>
-						<li role="presentation"><a href="#menu-tab-options" data-toggle="tab">Options</a></li>
-						<li role="presentation" class="active"><a href="#menu-tab-filter" data-toggle="tab">Filter</a></li>
-					</ul>
-				</div>
-				<div class="panel-body">
-					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane" id="menu-tab-menu">This is the menu</div>
-						<div role="tabpanel" class="tab-pane" id="menu-tab-options">This is the options</div>
-						
-						<div role="tabpanel" class="tab-pane active" id="menu-tab-filter">
-							<section>
-								<h3>Heartbeat: </h3>
-								<div id="filter-slider-heartbeat"></div>
-								<div class="filter-value-container">
-									<span id="filter-heartbeat-min"></span>
-									<span id="filter-heartbeat-max"></span>
-								</div>
-							</section>
-							<section>
-								<h3>Battery: </h3>
-								<div id="filter-slider-battery"></div>
-								<div class="filter-value-container">
-									<span id="filter-battery-min"></span>
-									<span id="filter-battery-max"></span>
-								</div>
-							</section>
-							<section>
-								<h3>Movements: </h3>
-								<div id="filter-slider-movements"></div>
-								<div class="filter-value-container">
-									<span id="filter-movements-min"></span>
-									<span id="filter-movements-max"></span>
-								</div>
-							</section>
-							<section>
-								<h3>Screen: </h3>
-								<div id="filter-slider-screen"></div>
-								<div class="filter-value-container">
-									<span id="filter-screen-min"></span>
-									<span id="filter-screen-max"></span>
-								</div>
-							</section>
-						</div>
-						
 					</div>
 				</div>
 			</div>

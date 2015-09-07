@@ -36,7 +36,7 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"filter" : filter,
 	"infoB" : infoBSegment,
 },{
-	"zoomControl" : false,
+	"zoomControl" : true,
 	"attributionControl" : false,
 	"contextmenu" : true,
 }).setView([38.71297, -9.15977], 15);

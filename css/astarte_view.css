@@ -40,6 +40,13 @@
 }
 
 .segment-body{
+	padding: 4px;
 	max-height: 600px;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.filter-value-container{
+	display: flex;
+	justify-content: space-between;
 }
