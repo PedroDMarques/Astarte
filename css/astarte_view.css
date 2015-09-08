@@ -9,42 +9,44 @@
 
 #map{
 	position: absolute;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	top: 0;
 	left: 0;
 }
 
-#info-bubble{
-	position: absolute;
-	width: 400px;
-	right: 20px;
-	bottom: 20px;
-	border-radius: 20px;
-	background-color: white;
-	padding: 10px;
-	display: none;
+#side-menu{
+	position: fixed;
+	width: 20%;
+	height: 100%;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	top: 0;
+	right: 0;
+	background-color: rgba(220, 220, 220, 1);
+	border-left: 1px solid grey;
+	overflow: auto;
 }
 
-#info-bubble h3{
-	margin: 0;
+.segment-header{
+	cursor: hand;
+	cursor: pointer;
 }
 
-#info-bubble hr{
-	color: black;
-	border-color: black;
-	height: 4px;
-	margin: 0;
-	margin-bottom: 10px;
+.segment-container{
+	margin-bottom: 20px;
 }
 
-#timeline-container{
-	position: absolute;
-	padding: 10px;
-	width: 40%;
-	bottom: 10px;
-	margin-left: 30%;
-	color: white;
-	background-color: rgba(0, 0, 0, 0.8);
-	text-align: center;
+.segment-body{
+	padding: 4px;
+	max-height: 600px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.filter-value-container{
+	display: flex;
+	justify-content: space-between;
 }

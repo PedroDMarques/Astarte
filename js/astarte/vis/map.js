@@ -16,7 +16,8 @@ astarte.Map = L.mapbox.Map.extend({
 	objNet: {
 		"broker" : null,
 		"timeline" : null,
-		"info_bubble" : null,
+		"filter" : null,
+		"infoB" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -54,19 +55,18 @@ astarte.Map = L.mapbox.Map.extend({
 		this._dataLayers[name].toggle();
 		if(this._dataLayers[name].isVisible()){
 			var timeline = astarte.ffon(this, ["timeline"]);
-			this._dataLayers[name].redraw(timeline.getCurMin(), timeline.getCurMax());
+			this._dataLayers[name].redraw(timeline.getCurTime());
 		}
 		return this;
 	},
 	
 	// -----------------------------------------------------------------
-	redraw: function(minTime, maxTime){
+	redraw: function(curTime){
 		var timeline = astarte.ffon(this, ["timeline"]);
-		minTime = minTime || timeline.getCurMin();
-		maxTime = maxTime || timeline.getCurMax();
+		curTime = curTime || timeline.getCurTime();
 		for(var dl in this._dataLayers){
 			if(this._dataLayers[dl].isVisible()){
-				this._dataLayers[dl].redraw(minTime, maxTime);
+				this._dataLayers[dl].redraw(curTime);
 			}
 		}
 		return this;
@@ -101,6 +101,26 @@ astarte.Map = L.mapbox.Map.extend({
 			},
 			"context" : this,
 		});
+		
+		this.contextmenu.addItem({
+			"separator" : true,
+		});
+		
+		this.contextmenu.addItem({
+			"text" : "Run Generator",
+			"callback" : function(){
+				var request = new XMLHttpRequest();
+				request.onreadystatechange = function(){
+					if(request.readyState === 4){
+						if(request.status === 200){
+							console.log(request.responseText);
+						}
+					}
+				}
+				request.open("get", "http://localhost/astarte/index.php/astarte_api/run_generator");
+				request.send();
+			},
+		})
 		
 	},
 	

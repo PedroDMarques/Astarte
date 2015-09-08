@@ -10,9 +10,10 @@ class Astarte_model extends CI_Model {
     public function get_all_sources(){
 
         $sql = "SELECT u.sender_mac, u.tempo_geracao, u.latitude, u.longitude, d.tipo, d.valor
-                FROM unit_info as u, unit_data as d
-                WHERE u.sender_mac = d.sender_mac
-                ORDER BY u.sender_mac, u.tempo_geracao";
+				FROM unit_info as u, unit_data as d 
+				WHERE u.sender_mac = d.sender_mac 
+				AND u.tempo_geracao = d.tempo_geracao
+				ORDER BY u.sender_mac, u.tempo_geracao";
 
         $result = $this->db->query($sql);
 
