@@ -86,6 +86,12 @@ var heatLayer = new astarte.HeatLayer({
 
 map.addDataLayer("heatmap", heatLayer);
 
+var routeLayer = new astarte.RouteLayer({
+	"map" : map
+}, {});
+
+map.addDataLayer("routes", routeLayer);
+
 var webService = new astarte.WebService({
 	"broker" : broker,
 }, {});

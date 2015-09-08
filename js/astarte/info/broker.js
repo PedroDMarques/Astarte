@@ -30,6 +30,7 @@ astarte.Broker = L.Class.extend({
 		this._minFound = "9999";
 		this._maxFound = "0";
 		
+		this._sections = {};
 		return this;
 	},
 	
@@ -91,6 +92,25 @@ astarte.Broker = L.Class.extend({
 		}
 		
 		return this;
+	},
+	
+	addSection: function(id, start, end, isOpen, risks){
+		var section = new astarte.Section(id, start, end, isOpen, risks);
+		section.setObjNet({"routeLayer" : astarte.ffon(this, ["map"]).getDataLayer("routes")});
+		this._sections[id] = section;
+	},
+	
+	addRoute: function(name, desc, sections){
+		console.log("broker: addRoute");
+		var sectionsToSend = [];
+		
+		for(var i = 0; i < sections.length; i++){
+			sectionsToSend.push(this._sections[sections[i]]);
+		}
+		this.fireEvent("route_added", {
+			"name" : name,
+			"desc" : desc,
+			"sections" : sectionsToSend});
 	},
 	
 	// -----------------------------------------------------------------
