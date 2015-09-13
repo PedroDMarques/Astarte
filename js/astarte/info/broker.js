@@ -1,15 +1,13 @@
 /*global astarte*/
 /*global L*/
 
-astarte.Broker = L.Class.extend({
+astarte.Broker = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	includes: L.Mixin.Events,
 	
 	// -----------------------------------------------------------------
 	options: {
-		
-		"info-bubble" : null,
 		
 	},
 	
@@ -22,20 +20,14 @@ astarte.Broker = L.Class.extend({
 	// -----------------------------------------------------------------
 	initialize: function(objNet, options){
 		
-		this.setOptions(options);
-		this.setObjNet(objNet);
+		astarte.Class.prototype.initialize.call(this, objNet, options);
+		
 		// Holds all the sources available
 		this._sources = {}
 		
 		this._minFound = "9999";
 		this._maxFound = "0";
 		
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
 		return this;
 	},
 	
@@ -103,9 +95,4 @@ astarte.Broker = L.Class.extend({
 		return this._sources[deviceMac];
 	},
 	
-	// -----------------------------------------------------------------
-	setObjNet: function(obj){
-		$.extend(this.objNet, obj);
-	}
-	
-})
+});

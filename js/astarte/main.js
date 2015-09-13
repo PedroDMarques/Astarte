@@ -1,4 +1,41 @@
+/*global L*/
+/*global $*/
+/*global jQuery*/
+
 var astarte = {};
+
+astarte.Class = L.Class.extend({
+	
+	// -----------------------------------------------------------------
+	options: {
+		
+	},
+	
+	// -----------------------------------------------------------------
+	objNet: {
+		
+	},
+	
+	// -----------------------------------------------------------------
+	initialize: function(objNet, options){
+		this.setOptions(options);
+		this.setObjNet(objNet);
+		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	setOptions: function(options){
+		L.setOptions(this, options);
+		return this;
+	},
+	
+	// -----------------------------------------------------------------
+	setObjNet: function(objNet){
+		$.extend(this.objNet, objNet);
+		return this;
+	}
+	
+})
 
 astarte.util = {
 	
@@ -18,6 +55,11 @@ astarte.util = {
 	// -----------------------------------------------------------------
 	lastInArr: function(arr){
 		return arr[arr.length - 1];
+	},
+	
+	// -----------------------------------------------------------------
+	displayDate: function(date){
+		return date.slice(0, 11) + " / " + date.slice(11, 21);
 	},
 	
 	// -----------------------------------------------------------------
@@ -51,4 +93,21 @@ astarte.util = {
 
 astarte.ffon = function(obj, arr){
 	return astarte.util.findFirstObjNet(obj, arr);
+}
+
+jQuery.fn.animateAuto = function(prop, speed, callback){
+    var elem, height, width;
+    return this.each(function(i, el){
+        el = jQuery(el), elem = el.clone().css({"height":"auto","width":"auto"}).appendTo("body");
+        height = elem.innerHeight(),
+        width = elem.innerWidth(),
+        elem.remove();
+        
+        if(prop === "height")
+            el.animate({"height":height}, speed, callback);
+        else if(prop === "width")
+            el.animate({"width":width}, speed, callback);  
+        else if(prop === "both")
+            el.animate({"width":width,"height":height}, speed, callback);
+    });  
 }

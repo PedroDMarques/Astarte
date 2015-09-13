@@ -2,7 +2,7 @@
 /*global L*/
 /*global $*/
 
-astarte.ValAnalizer = L.Class.extend({
+astarte.ValAnalizer = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -16,20 +16,7 @@ astarte.ValAnalizer = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	initialize: function(objNet, options){
-		this.setOptions(options);
-		this.setObjNet(objNet);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setObjNet: function(obj){
-		$.extend(this.objNet, obj);
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		return this;
 	},
 	

@@ -1,7 +1,7 @@
 /*global astarte*/
 /*global L*/
 
-astarte.Filter = L.Class.extend({
+astarte.Filter = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -22,9 +22,7 @@ astarte.Filter = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	initialize: function(objNet, options){
-		this.setOptions(options);
-		this.setObjNet(objNet);
-		
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		return this;
 	},
 	
@@ -63,17 +61,5 @@ astarte.Filter = L.Class.extend({
 		this.setOptions(options);
 		return this;
 	},
-	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setObjNet: function(objNet){
-		$.extend(this.objNet, objNet);
-		return this;
-	}
 	
 });

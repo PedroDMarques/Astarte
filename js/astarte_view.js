@@ -1,40 +1,50 @@
 var broker = new astarte.Broker({}, {});
 
-var infoBSegment = new astarte.InfoB({}, {
-	"segment_id" : "info-b-segment",
-});
-var filtersSegment = new astarte.MenuSegment({}, {
-	"segment_id" : "filters-segment",
-});
-var optionsSegment = new astarte.MenuSegment({}, {
-	"segment_id" : "options-segment",
-});
-var generatorSegment = new astarte.MenuSegment({}, {
-	"segment_id" : "generator-segment",
-});
-
 var markerCreator = new astarte.MarkerCreator({});
 
 var timeline = new astarte.Timeline({}, {
-	"timeline" : "timeline",
-	"timeline_display" : "timeline-time",
+	"timeline" : "timeline-slider",
+	"timeline_display" : "timeline-display",
 	"range" : "timeline-range",
-	"range_display_min" : "timeline-range-min",
-	"range_display_max" : "timeline-range-max",
-	"time_input" : "timeline-input",
-	"stop_btn" : "timeline-stop",
-	"play_btn" : "timeline-play",
+	"range_display_min" : "timeline-range-min-display",
+	"range_display_max" : "timeline-range-max-display",
+	"time_input" : "timeline-time-input",
+	"stop_btn" : "timeline-stop-button",
+	"play_btn" : "timeline-play-button",
+});
+
+var infoBee = new astarte.InfoBee($("#menu-component-info-bee"), {
+	"broker" : broker,
+}, {
+	"start_open" : false,
 });
 
 var analizer = new astarte.ValAnalizer({}, {});
 
 var filter = new astarte.Filter({}, {});
 
+var uiFilter = new astarte.UiFilter($("#menu-component-basic-filter"), {
+	
+}, {
+	"heartbeat_slider" : "filter-slider-heartbeat",
+	"heartbeat_min_display" : "filter-heartbeat-min-display",
+	"heartbeat_max_display": "filter-heartbeat-max-display",
+	"battery_slider" : "filter-slider-battery",
+	"battery_min_display" : "filter-battery-min-display",
+	"battery_max_display": "filter-battery-max-display",
+	"movements_slider" : "filter-slider-movements",
+	"movements_min_display" : "filter-movements-min-display",
+	"movements_max_display": "filter-movements-max-display",
+	"screen_slider" : "filter-slider-screen",
+	"screen_min_display" : "filter-screen-min-display",
+	"screen_max_display": "filter-screen-max-display",
+});
+
 var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"broker" : broker,
 	"timeline" : timeline,
 	"filter" : filter,
-	"infoB" : infoBSegment,
+	"infoBee" : infoBee,
 },{
 	"zoomControl" : true,
 	"attributionControl" : false,
@@ -50,26 +60,12 @@ broker.setObjNet({
 timeline.setObjNet({
 	"map" : map,
 });
-infoBSegment.setObjNet({
+infoBee.setObjNet({
 	"map" : map,
 });
-
-var uiFilter = new astarte.UiFilter({
+uiFilter.setObjNet({
 	"map" : map,
-}, {
-	"heartbeat_slider" : "filter-slider-heartbeat",
-	"heartbeat_display_min" : "filter-heartbeat-min",
-	"heartbeat_display_max" : "filter-heartbeat-max",
-	"battery_slider" : "filter-slider-battery",
-	"battery_display_min" : "filter-battery-min",
-	"battery_display_max" : "filter-battery-max",
-	"movements_slider" : "filter-slider-movements",
-	"movements_display_min" : "filter-movements-min",
-	"movements_display_max" : "filter-movements-max",
-	"screen_slider" : "filter-slider-screen",
-	"screen_display_min" : "filter-screen-min",
-	"screen_display_max" : "filter-screen-max",
-});
+})
 
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
@@ -89,5 +85,11 @@ map.addDataLayer("heatmap", heatLayer);
 var webService = new astarte.WebService({
 	"broker" : broker,
 }, {});
+
+$("#side-menu-scroll").sortable({
+	"items" : "> .astarte-menu-component",
+	"handle" : ".astarte-menu-component-header",
+	"containment" : "parent",
+});
 
 webService.start();

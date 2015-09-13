@@ -53,7 +53,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 				this.setOptions({
 					"draw_all_markers_from_highlighted" : false,
 				});
-				astarte.ffon(this, ["map", "infoB"]).setClusterInformation(e.layer.getAllChildMarkers());
+				astarte.ffon(this, ["map", "infoBee"]).setClusterInformation(e.layer.getAllChildMarkers());
 			}
 			
 			cluster.on("clusterclick", clusterClickFunc.bind(this));
@@ -251,8 +251,8 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	
 	// -----------------------------------------------------------------
 	setInfoB: function(marker){
-		var infoB = astarte.ffon(this, ["map", "infoB"]);
-		infoB.setMarkerInformation(marker);
+		var infoBee = astarte.ffon(this, ["map", "infoBee"]);
+		infoBee.setMarkerInformation(marker);
 	},
 	
 	// -----------------------------------------------------------------
@@ -269,12 +269,50 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	panZoomToMarker: function(marker){
 		var cg = this._getMarkerCG(marker);
 		if(this.hasLayer(cg) && cg.hasLayer(marker)){
-			var map = astarte.ffon(this, ["map"]);
-			map.panTo(marker.getLatLng());
-			setTimeout(function(){
-				cg.zoomToShowLayer(marker, function(){});	
-			}, 250);
+			cg.zoomToShowLayer(marker, function(){});
 		}
+	},
+	
+	// -----------------------------------------------------------------
+	getPreviousMarker: function(marker){
+		var previous = null;
+		var markers = this._markers[marker.deviceMac];
+		for(var i = markers.length - 1; i >= 0; i--){
+			var intMarker = markers[i];
+			if(intMarker.genTime === marker.genTime){
+				if(i > 0){
+					previous = markers[i - 1];
+					break;
+				}
+			}
+		}
+		return previous;
+	},
+	
+	// -----------------------------------------------------------------
+	getNextMarker: function(marker){
+		var next = null;
+		var markers = this._markers[marker.deviceMac];
+		for(var i = 0; i < markers.length; i++){
+			var intMarker = markers[i];
+			if(intMarker.genTime === marker.genTime){
+				if(i < markers.length - 1){
+					next = markers[i + 1];
+					break;
+				}
+			}
+		}
+		return next;
+	},
+	
+	// -----------------------------------------------------------------
+	getFirstMarker: function(marker){
+		return this._markers[marker.deviceMac][0];
+	},
+	
+	// -----------------------------------------------------------------
+	getLastMarker: function(marker){
+		return astarte.util.lastInArr(this._markers[marker.deviceMac]);
 	}
 	
 });

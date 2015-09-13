@@ -18,12 +18,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
 		<!--
-			Bootstrap
-		-->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-		<!--
 			Semantic
 		-->
 		<link rel="stylesheet" href="<?php echo base_url();?>semantic/semantic.min.css">
@@ -68,154 +62,153 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/webService.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/menuComponent.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/infoBee.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/menuSegment.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/infoB.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
-		<link rel="stylesheet" href="<?php echo base_url();?>css/timeline.css">
 	
 	</head>
 
 	<body>
 
-		<div id="wrapper">
-
-			<div id="map"></div>
+		<div id="page-wrapper">
 			
 			<div id="side-menu">
 				
-				<!-- Info Bee -->
-				
-				<div id="info-b-segment" class="segment-container">
-					<div class="ui segments">
-						<div class="ui raised segment">
-							<h2 class="ui header segment-header">
-								<i class="info icon"></i>
-								<div class="content">
-									Context Info
-								</div>
-							</h2>
-							<div class="segment-body">
-								<div class="ui segments">
-									
-								</div>
-							</div>
+				<div class="ui vertical fluid menu">
+					<div class="item">
+						<div class="ui icon input">
+							<input type="text" placeholder="Search...">
+							<i class="circular search link icon"></i>
 						</div>
 					</div>
 				</div>
 				
-				<!-- Filters -->
-				
-				<div id="filters-segment" class="segment-container">
-					<div class="ui segments">
-						<div class="ui raised segment">
-							<h2 class="ui header segment-header">
-								<i class="filter icon"></i>
-								<div class="content">
-									Filters
-								</div>
-							</h2>
-							<div class="segment-body">
+				<ul id="side-menu-scroll">
+					
+					<div id="menu-component-info-bee" class="item astarte-menu-component">
+						
+						<h3 class="ui top attached block header astarte-menu-component-header">
+							<i class="users icon"></i>
+							<div class="content">
+								<div class="main-header">Contextual Information</div>
+								<div class="sub header"></div>
+							</div>
+						</h3>
+						
+						<div class="ui attached segment astarte-menu-component-body">
+							
+							<div class="astarte-menu-component-body-specifics">
 								
-								<div id="filter-slider-heartbeat"></div>
-								<div class="filter-value-container">
-									<span id="filter-heartbeat-min">13</span>
-									<span id="filter-heartbeat-max">13</span>
+								
+								
+							</div>
+							
+							<div class="ui dimmer astarte-menu-component-dimmer">
+								<div class="ui text loader">Loading...</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+					<div id="menu-component-basic-filter" class="item astarte-menu-component">
+						
+						<h3 class="ui top attached block header astarte-menu-component-header">
+							<i class="filter icon"></i>
+							<div class="content">
+								<div class="main-header">Basic Filters</div>
+								<div class="sub header"></div>
+							</div>
+						</h3>
+						
+						<div class="ui attached segment astarte-menu-component-body">
+							
+							<div class="astarte-menu-component-body-specifics">
+								
+								<h3 class="ui header">Heartbeat:</h3>
+								
+								<div id="filter-slider-heartbeat" class="filter-slider"></div>
+								<div class="filter-display-container">
+									<p id="filter-heartbeat-min-display">0</p>
+									<p id="filter-heartbeat-max-display">240</p>
 								</div>
 								
-								<div id="filter-slider-battery"></div>
-								<div class="filter-value-container">
-									<span id="filter-battery-min">13</span>
-									<span id="filter-battery-max">13</span>
+								<h3 class="ui header">Battery:</h3>
+								
+								<div id="filter-slider-battery" class="filter-slider"></div>
+								<div class="filter-display-container">
+									<p id="filter-battery-min-display">0</p>
+									<p id="filter-battery-max-display">100</p>
 								</div>
 								
-								<div id="filter-slider-movements"></div>
-								<div class="filter-value-container">
-									<span id="filter-movements-min">13</span>
-									<span id="filter-movements-max">13</span>
+								<h3 class="ui header">Movements:</h3>
+								
+								<div id="filter-slider-movements" class="filter-slider"></div>
+								<div class="filter-display-container">
+									<p id="filter-movements-min-display">0</p>
+									<p id="filter-movements-max-display">100</p>
 								</div>
 								
-								<div id="filter-slider-screen"></div>
-								<div class="filter-value-container">
-									<span id="filter-screen-min">13</span>
-									<span id="filter-screen-max">13</span>
+								<h3 class="ui header">Screen:</h3>
+								
+								<div id="filter-slider-screen" class="filter-slider"></div>
+								<div class="filter-display-container">
+									<p id="filter-screen-min-display">0</p>
+									<p id="filter-screen-max-display">100</p>
 								</div>
 								
 							</div>
-						</div>
-					</div>
-				</div>
-				
-				<!-- Options -->
-				
-				<div id="options-segment" class="segment-container">
-					<div class="ui segments">
-						<div class="ui raised segment">
-							<h2 class="ui header segment-header">
-								<i class="settings icon"></i>
-								<div class="content">
-									Options
-								</div>
-							</h2>
-							<div class="segment-body">
-								<div class="ui segments">
-									<div class="ui segment">1</div>
-									<div class="ui segment">2</div>
-									<div class="ui segment">3</div>
-									<div class="ui segment">4</div>
-								</div>
+							
+							<div class="ui dimmer astarte-menu-component-dimmer">
+								<div class="ui text loader">Loading...</div>
 							</div>
+							
 						</div>
+						
 					</div>
-				</div>
-				
-				<!-- Point Generation -->
-				
-				<div id="generator-segment" class="segment-container">
-					<div class="ui segments">
-						<div class="ui raised segment">
-							<h2 class="ui header segment-header">
-								<i class="wizard icon"></i>
-								<div class="content">
-									Point Generation
-								</div>
-							</h2>
-							<div class="segment-body">
-								<div class="ui segments">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>	
+
+				</ul>
 				
 			</div>
-		
-			<div id="timeline-container" class="panel panel-default">
-				<div id="timeline-container-body" class="panel-body">
+			
+			<div id="map-bottom-container">
+				<div id="map"></div>
+				
+				<div id="bottom-menu">
 					
-					<div id="timeline-top">
-						<span id="timeline-control" class="input-group input-group-sm">
-							<span class="input-group-btn">
-								<button id="timeline-stop" type="button" class="btn btn-default"><i class="fa fa-stop"></i></button>
-							</span>
-							<input id="timeline-input" type="text" class="form-control" maxlength="3"></input>
-							<span class="input-group-btn">
-								<button id="timeline-play" type="button" class="btn btn-default"><i class="fa fa-play"></i></button>
-							</span>
-						</span>
-						
-						<p id="timeline-time"></p>
+					<div id="timeline-container">
+						<div class="ui raised segment">
+							
+							<div id="timeline-top">
+								<div id="timeline-input-container" class="ui labeled input">
+										<div class="ui label">
+											Animation Time:
+										</div>
+										<input id="timeline-time-input" type="text" maxlength="3">
+								</div>
+								<div id="timeline-control-container">
+									<button id="timeline-stop-button" type="button" class="ui basic circular icon button"><i class="stop icon"></i></button>
+									<button id="timeline-play-button" type="button" class="ui basic circular big icon button"><i class="play icon"></i></button>
+									<button type="button" class="ui basic circular icon button"><i class="pause icon"></i></button>
+								</div>
+								<p id="timeline-display">2015:22:22 12-12-12</p>
+							</div>
+							
+							<div id="timeline-slider"></div>
+							<div id="timeline-range"></div>
+							
+							<div id="timeline-bottom">
+								<p id="timeline-range-min-display"></p>
+								<p id="timeline-range-max-display"></p>
+							</div>
+							
+						</div>
 					</div>
 					
-					<div id="timeline"></div>
-					<div id="timeline-range"></div>
-					
-					<div id="timeline-bottom">
-						<p id="timeline-range-min"></p>
-						<p id="timeline-range-max"></p>
-					</div>
 				</div>
+				
 			</div>
 			
 		</div>
@@ -225,3 +218,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</body>
 
 </html>
+
+
+<!--
+	
+	Marker Cluster ::::
+	-------------------
+	
+	<div id="marker-cluster-filter-dropdown" class="ui fluid selection dropdown">
+		<input type="hidden">
+		<i class="dropdown icon"></i>
+		<div class="text">Generation Time</div>
+		<div class="menu">
+			<div class="divider"></div>
+			<div class="item" data-value="genTime" data-text="Generation Time">Generation Time</div>
+			<div class="item" data-value="heartbeat" data-text="Heartbeat">Heartbeat</div>
+			<div class="item" data-value="battery" data-text="Battery">Battery</div>
+			<div class="item" data-value="movements" data-text="Movements">Movements</div>
+			<div class="item" data-value="screen" data-text="Screen">Screen</div>
+		</div>
+	</div>
+	
+	<div class="ui celled selection list marker-cluster-list">
+		<div class="item">
+			<i class="big marker icon"></i>
+			<div class="content">
+				<div class="header">Device Mac here</div>
+				<div class="description">More information</div>
+			</div>
+		</div>
+	</div>
+	
+	<button class='ui fluid button'>Close</button>
+	
+	Marker Information ::::
+	-----------------------
+	
+	<h3 class="ui header">Basic Information:</h3>
+								
+	<div class="ui celled selection list">
+		<div class="item">
+			<div class="header">
+				Latitude:
+				<div class="right floated content">35.555</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header">
+				Longitude:
+				<div class="right floated content">-9.200156</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header">
+				Generation Time:
+				<div class="right floated content">2015-02-15 / 12:00:00</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="four ui icon buttons">
+		<button type="button" class="ui icon button"><i class="step backward icon"></i></button>
+		<button type="button" class="ui icon button"><i class="left chevron icon"></i></button>
+		<button type="button" class="ui icon button"><i class="right chevron icon"></i></button>
+		<button type="button" class="ui icon button"><i class="step forward icon"></i></button>
+	</div>
+	
+	<h3 class="ui header">Data Sent:</h3>
+	
+	<div class="ui celled selection list">
+		<div class="item">
+			<div class="header">
+				Heartbeat:
+				<div class="right floated content">214</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header">
+				Battery:
+				<div class="right floated content">214</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header">
+				Movements:
+				<div class="right floated content">214</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="header">
+				Screen:
+				<div class="right floated content">214</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="three ui buttons">
+		<button type="button" class="ui button">Focus</button>
+		<button type="button" class="ui button">Pan</button>
+		<button type="button" class="ui button">History</button>
+	</div>
+	
+	<div class="ui divider"></div>
+	
+	<div class="two ui buttons">
+		<button type="button" class="ui button">Back</button>
+		<button type="button" class="ui button">Close</button>
+	</div>
+
+-->

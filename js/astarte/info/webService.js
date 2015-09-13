@@ -1,7 +1,7 @@
 /*global astarte*/
 /*global L*/
 
-astarte.WebService = L.Class.extend({
+astarte.WebService = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -15,8 +15,7 @@ astarte.WebService = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	initialize: function(objNet, options){
-		this.setOptions(options);
-		this.setObjNet(objNet);
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		return this;
 	},
 	
@@ -63,17 +62,6 @@ astarte.WebService = L.Class.extend({
 		request.open("GET", this.options["REQUEST_URL"] + "get_all_sources", true);
 		request.send();
 		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setObjNet: function(obj){
-		$.extend(this.objNet, obj);
 	},
 	
 });

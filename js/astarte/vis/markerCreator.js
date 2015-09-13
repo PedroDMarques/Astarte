@@ -1,7 +1,7 @@
 /*global astarte*/
 /*global L*/
 
-astarte.MarkerCreator = L.Class.extend({
+astarte.MarkerCreator = astarte.Class.extend({
 
 	//-----------------------------------------------------------------------------
 	options: {
@@ -11,7 +11,13 @@ astarte.MarkerCreator = L.Class.extend({
 	},
 	
 	//-----------------------------------------------------------------------------
-	initialize: function(){
+	objNet: {
+		
+	},
+	
+	//-----------------------------------------------------------------------------
+	initialize: function(objNet, options){
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		return this;	
 	},
 	

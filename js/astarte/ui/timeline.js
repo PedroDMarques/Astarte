@@ -2,7 +2,7 @@
 /*global L*/
 /*global $*/
 
-astarte.Timeline = L.Class.extend({
+astarte.Timeline = astarte.Class.extend({
 
 	// -----------------------------------------------------------------
 	options: {
@@ -23,8 +23,7 @@ astarte.Timeline = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	initialize: function(objNet, options){
-		this.setOptions(options);
-		this.setObjNet(objNet);
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		
 		this._timeline = $("#" + this.options["timeline"]);
 		this._timelineDisplay = $("#" + this.options["timeline_display"]);
@@ -92,7 +91,7 @@ astarte.Timeline = L.Class.extend({
 		var interval = this._max - this._min;
 		var curTime = this._min + (interval * this._timeline.slider("value") / 1000);
 		this._curTime = astarte.util.dateToString(new Date(curTime));
-		this._timelineDisplay.html(this._curTime);
+		this._timelineDisplay.html(astarte.util.displayDate(this._curTime));
 		var map = astarte.ffon(this, ["map"]);
 		map.redraw(this._curTime);
 	},
@@ -109,8 +108,8 @@ astarte.Timeline = L.Class.extend({
 		var maxTime = this._min + (interval * this._range.slider("values", 1) / 1000);
 		this._curMin = astarte.util.dateToString(new Date(minTime));
 		this._curMax = astarte.util.dateToString(new Date(maxTime));
-		this._rangeDisplayMin.html(this._curMin);
-		this._rangeDisplayMax.html(this._curMax);
+		this._rangeDisplayMin.html(astarte.util.displayDate(this._curMin));
+		this._rangeDisplayMax.html(astarte.util.displayDate(this._curMax));
 	},
 	
 	// -----------------------------------------------------------------
@@ -170,17 +169,5 @@ astarte.Timeline = L.Class.extend({
 	getCurTime: function(){
 		return this._curTime;	
 	},
-	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	setObjNet: function(objNet){
-		$.extend(this.objNet, objNet);
-		return this;
-	}
 	
 });
