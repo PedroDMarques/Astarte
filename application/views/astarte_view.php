@@ -223,14 +223,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="ui celled selection list">
 								<div class="item">
 									<div class="header">
-										All Markers:
-										<div id="quick-stats-all-markers" class="right floated content">0</div>
+										Drawn Markers:
+										<div id="quick-stats-drawn-markers" class="right floated content">0</div>
 									</div>
 								</div>
 								<div class="item">
 									<div class="header">
-										Drawn Markers:
-										<div id="quick-stats-drawn-markers" class="right floated content">0</div>
+										All Markers:
+										<div id="quick-stats-all-markers" class="right floated content">0</div>
 									</div>
 								</div>
 								<div class="item">
