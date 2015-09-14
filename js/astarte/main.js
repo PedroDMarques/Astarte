@@ -87,6 +87,26 @@ astarte.util = {
 		}
 		str += "-" + mon + "-" + day + " " + hour + ":" + min + ":" + sec;
 		return str;
+	},
+	
+	// -----------------------------------------------------------------
+	/* Calcula a distância, em metros, entre dois pontos geográficos */
+	geographicDistance: function (point1, point2) {
+		return point1.distanceTo(point2);
+	},
+
+	// -----------------------------------------------------------------
+	/* Formata as coordenadas geográficas de um ponto de modo a serem legíveis por seres humanos normais */
+	prettyCoords: function (point) {
+		var lat = point.lat;
+		var lng = point.lng;
+		
+		var latOrient = lat > 0 ? "Norte" : "Sul";
+		var lngOrient = lng > 0 ? "Este" : "Oeste";
+		
+		
+		return "(" + String(Math.abs(lat).toFixed(6)) + "° " + latOrient +
+			", " + String(Math.abs(lng).toFixed(6)) + "° " + lngOrient + ")"; 
 	}
 	
 }

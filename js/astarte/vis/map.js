@@ -103,6 +103,14 @@ astarte.Map = L.mapbox.Map.extend({
 		});
 		
 		this.contextmenu.addItem({
+			"text" : "Toggle Routes",
+			"callback" : function(){
+				this.toggleDataLayer("routes");
+			},
+			"context" : this,
+		});
+		
+		this.contextmenu.addItem({
 			"separator" : true,
 		});
 		
