@@ -22,6 +22,7 @@ astarte.QuickStats = astarte.Class.extend({
 		astarte.Class.prototype.initialize.call(this, objNet, options);
 		
 		this._ignoreTimeCheckBox = $("#" + this.options["ignore_time_checkbox"]);
+		this._ignoreTimeCheckBox.checkbox();
 		this._ignoreTimeCheckBox.on("change", (this.toggleIgnoreTime).bind(this));
 		this._ignoreTime = true;
 		

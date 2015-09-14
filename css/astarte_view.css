@@ -131,3 +131,24 @@ body * {
 .flex-container.flex-space-between{
 	justify-content: space-between;
 }
+
+.value-analizer-slider-container{
+	display: flex;
+	justify-content: space-between;
+}
+
+.value-analizer-slider-container *{
+	align-self: center;
+}
+
+.value-analizer-slider-container > .ui.input{
+	width: 60px;
+}
+
+.value-analizer-slider-container input{
+	text-align: center;
+}
+
+.value-analizer-slider{
+	width: 50%;
+}

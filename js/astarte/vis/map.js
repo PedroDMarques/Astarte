@@ -58,6 +58,9 @@ astarte.Map = L.mapbox.Map.extend({
 			var timeline = astarte.ffon(this, ["timeline"]);
 			this._dataLayers[name].redraw(timeline.getCurTime());
 		}
+		var quickStats = astarte.ffon(this, ["quickStats"]);
+		var ignoreTime = quickStats.isIgnoreTime();
+		quickStats.setQuickStats(this.getQuickStats(ignoreTime));
 		return this;
 	},
 	
@@ -82,7 +85,7 @@ astarte.Map = L.mapbox.Map.extend({
 		var broker = astarte.ffon(this, ["broker"]);
 		var obj = {
 			"all_markers" : markerLayer.getMarkerCount(),
-			"drawn_markers" : markerLayer.getDrawnMarkersCount(),
+			"drawn_markers" : markerLayer.isVisible() ? markerLayer.getDrawnMarkersCount() : 0,
 			"unique_devices" : broker.getSourceCount(),
 		}
 		return obj;
@@ -141,10 +144,10 @@ astarte.Map = L.mapbox.Map.extend({
 						}
 					}
 				}
-				request.open("get", "http://localhost/astarte/index.php/astarte_api/run_generator");
+				request.open("get", "http://accessible-serv.lasige.di.fc.ul.pt/~lost/astarte/index.php/astarte_api/run_generator");
 				request.send();
 			},
-		})
+		});
 		
 	},
 	

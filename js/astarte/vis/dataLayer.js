@@ -11,6 +11,7 @@ astarte.DataLayer = L.LayerGroup.extend({
 	// -----------------------------------------------------------------
 	objNet: {
 		"map" : null,
+		"val_analizer" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -33,7 +34,7 @@ astarte.DataLayer = L.LayerGroup.extend({
 	
 	// -----------------------------------------------------------------
 	toggle: function(){
-		var map = this.objNet["map"];
+		var map = this.objNet.map;
 		this._visible = !this._visible;
 		if(this._visible){
 			map.addLayer(this);

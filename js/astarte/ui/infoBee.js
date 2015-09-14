@@ -57,6 +57,7 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		var broker = astarte.ffon(this, ["broker"]);
 		
 		this._setLoading("Gathering Information...");
+		this.open();
 		
 		this._currentMarker = marker;
 		var deviceMac = marker.deviceMac;
@@ -356,6 +357,7 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		this._clearBody();
 		
 		this._setLoading("Gathering Markers...");
+		this.open();
 		
 		this._lastClusterInformation = markers;
 		
