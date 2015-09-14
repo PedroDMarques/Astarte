@@ -68,8 +68,8 @@ astarte.Source = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	getAllLocations: function(){
-		return this._locations;
+	getSourceCount: function(){
+		return this._sources.length;
 	},
 	
 	// -----------------------------------------------------------------

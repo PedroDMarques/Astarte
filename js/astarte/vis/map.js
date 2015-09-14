@@ -18,6 +18,7 @@ astarte.Map = L.mapbox.Map.extend({
 		"timeline" : null,
 		"filter" : null,
 		"infoBee" : null,
+		"quickStats" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -69,7 +70,22 @@ astarte.Map = L.mapbox.Map.extend({
 				this._dataLayers[dl].redraw(curTime);
 			}
 		}
+		var quickStats = astarte.ffon(this, ["quickStats"]);
+		var ignoreTime = quickStats.isIgnoreTime();
+		quickStats.setQuickStats(this.getQuickStats(ignoreTime));
 		return this;
+	},
+	
+	//-----------------------------------------------------------------------------
+	getQuickStats: function(ignoreTime){
+		var markerLayer = this.getDataLayer("markers");
+		var broker = astarte.ffon(this, ["broker"]);
+		var obj = {
+			"all_markers" : markerLayer.getMarkerCount(),
+			"drawn_markers" : markerLayer.getDrawnMarkersCount(),
+			"unique_devices" : broker.getSourceCount(),
+		}
+		return obj;
 	},
 	
 	//-----------------------------------------------------------------------------

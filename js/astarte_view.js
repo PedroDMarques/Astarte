@@ -19,6 +19,13 @@ var infoBee = new astarte.InfoBee($("#menu-component-info-bee"), {
 	"start_open" : false,
 });
 
+var quickStats = new astarte.QuickStats({}, {
+	"ignore_time_checkbox" : "quick-stats-ignore-time",
+	"all_markers" : "quick-stats-all-markers",
+	"drawn_markers" : "quick-stats-drawn-markers",
+	"unique_devices" : "quick-stats-unique-devices",
+});
+
 var analizer = new astarte.ValAnalizer({}, {});
 
 var filter = new astarte.Filter({}, {});
@@ -45,6 +52,7 @@ var map = new astarte.Map('map', 'mapbox.streets-satellite', {
 	"timeline" : timeline,
 	"filter" : filter,
 	"infoBee" : infoBee,
+	"quickStats" : quickStats,
 },{
 	"zoomControl" : true,
 	"attributionControl" : false,
@@ -65,7 +73,10 @@ infoBee.setObjNet({
 });
 uiFilter.setObjNet({
 	"map" : map,
-})
+});
+quickStats.setObjNet({
+	"map" : map,
+});
 
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,

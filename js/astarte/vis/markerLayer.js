@@ -23,6 +23,8 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		this._highlightedMarker = {};
 		this._highlightedConnection = null;
 		
+		this._drawnMarkers = 0;
+		
 		this._clusterGroups = {};
 		
 		var broker = astarte.ffon(this, ["map", "broker"]);
@@ -131,6 +133,8 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	redraw: function(curTime){
 		
+		this._drawnMarkers = 0;
+		
 		if(!curTime){
 			var timeline = astarte.ffon(this, ["map", "timeline"]);
 			curTime = timeline.getCurTime();
@@ -160,6 +164,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 					for(var i = 0; i < markers.length; i++){
 						var marker = markers[i];
 						cg.addLayer(marker);
+						this._drawnMarkers++;
 						this._highlightConnection.addLatLng(marker.getLatLng());
 					}
 				}else{
@@ -170,6 +175,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 						var marker = markers[i];
 						if(marker === this._highlightedMarker){
 							cg.addLayer(marker);
+							this._drawnMarkers++;
 						}else{
 							cg.removeLayer(marker);
 						}
@@ -188,6 +194,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 							var opacity = markerCreator.calculateOpacity(marker.genTime, curTime);
 							marker.setOpacity(opacity);
 							cg.addLayer(marker);
+							this._drawnMarkers++;
 							foundLatest = true;
 						}else{
 							cg.removeLayer(marker);
@@ -197,6 +204,20 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 			}
 			
 		}
+	},
+	
+	// -----------------------------------------------------------------
+	getDrawnMarkersCount: function(){
+		return this._drawnMarkers;
+	},
+	
+	// -----------------------------------------------------------------
+	getMarkerCount: function(){
+		var count = 0;
+		for(var deviceMac in this._markers){
+			count += this._markers[deviceMac].length;
+		}
+		return count;
 	},
 	
 	// -----------------------------------------------------------------

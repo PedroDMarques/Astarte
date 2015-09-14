@@ -54,6 +54,15 @@ astarte.Broker = astarte.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
+	getSourceCount: function(){
+		var count = 0;
+		for(var deviceMac in this._sources){
+			count++;
+		}
+		return count;
+	},
+	
+	// -----------------------------------------------------------------
 	addSource: function(deviceMac, userType){
 		
 		// Don't overwrite any existing source with the same deviceMac

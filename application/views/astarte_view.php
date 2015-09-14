@@ -68,6 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/ui/menuComponent.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/infoBee.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/quickStats.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 	
@@ -209,6 +210,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 						</div>
 					</div>
+					
+					<div id="basic-stats-container">
+						<div class="ui raised segment">
+							<div class="flex-container flex-space-between">
+								<h3 class="ui header">Quick Stats:</h3>
+								<div class="ui disabled checkbox">
+									<label>Ignore Time</label>
+									<input id="quick-stats-ignore-time" type="checkbox" checked="" class="hidden">
+								</div>
+							</div>
+							<div class="ui celled selection list">
+								<div class="item">
+									<div class="header">
+										All Markers:
+										<div id="quick-stats-all-markers" class="right floated content">0</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="header">
+										Drawn Markers:
+										<div id="quick-stats-drawn-markers" class="right floated content">0</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="header">
+										Unique Devices:
+										<div id="quick-stats-unique-devices" class="right floated content">0</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<script>
+						$(".ui.checkbox").checkbox();
+					</script>
 					
 				</div>
 				

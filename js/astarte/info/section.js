@@ -1,28 +1,35 @@
-astarte.Section = L.Class.extend({
-  
-  objNet : {
-	  "routeLayer" : null,
-  },
-  
-  setObjNet: function(objNet){
-	  $.extend(this.objNet, objNet);
-  },
-  
-  initialize: function (id, start, end, isOpen, risks) {
-    this.id = id;
-    this.start = start;
-    this.end = end;
-    this.isOpen = isOpen;
-    this.risks = risks;
-    this.line;
-    this.color;
-    this.oldColor;
-    
-    this.trueColor;
-    this.associatedRoute;
-    this.otherRoutes = [];
-  
-  },
+/*global astarte*/
+/*global L*/
+/*global $*/
+
+astarte.Section = astarte.Class.extend({
+	
+	// -----------------------------------------------------------------
+	options: {
+		
+	},
+	
+	// -----------------------------------------------------------------
+	objNet : {
+		"routeLayer" : null,
+	},
+  	
+	// -----------------------------------------------------------------
+  	initialize: function (id, start, end, isOpen, risks) {
+		this.id = id;
+		this.start = start;
+		this.end = end;
+		this.isOpen = isOpen;
+		this.risks = risks;
+		this.line;
+		this.color;
+		this.oldColor;
+		
+		this.trueColor;
+		this.associatedRoute;
+		this.otherRoutes = [];
+	
+	},
 
   getDistance: function() {
     return astarte.util.geographicDistance(this.start, this.end);
