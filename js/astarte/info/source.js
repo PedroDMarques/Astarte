@@ -2,7 +2,7 @@
 /*global L*/
 /*global $*/
 
-astarte.Source = L.Class.extend({
+astarte.Source = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	options: {
@@ -11,98 +11,102 @@ astarte.Source = L.Class.extend({
 	
 	// -----------------------------------------------------------------
 	objNet: {
-		"broker" : null,
+		
 	},
 	
 	// -----------------------------------------------------------------
-	initialize: function(deviceMac, userType, objNet, options){
+	initialize: function(sourceVars, objNet, options){
+		astarte.Class.prototype.initialize.call(this, objNet, options);
 		
-		this.setOptions(options);
-	
-		this.setObjNet(objNet);
-	
-		this._deviceMac = deviceMac;
-		this._userType = userType;
+		this._deviceMac = sourceVars.deviceMac;
+		this._userType = sourceVars.userType;
 		
-		// Holds basic information as well as being markers that can be drawn (have marker.lat, marker.lng, marker.genTime)
-		this._locations = [];
-		// Holds all data from each location (maps genTime -> data)
-		this._locationData = {};
+		this._locations = {
+			
+			// Objects containing all the information pertinent to a location
+			"objects" : [],
+			
+			// Lists specifying the order of each location object regarding a particular time type
+			"ordering" : {
+				"genTime" : [],
+				"recTime" : [],
+				"coordTime" : [],
+			},
+			
+			// Lists specifying which objects cannot be ordered by a specific time. (should always be show)
+			"unorderable" : {
+				"genTime" : [],
+				"recTime" : [],
+				"coordTime" : [],
+			},
+		}
 		
-		return this;
 	},
 	
-	// -----------------------------------------------------------------
-	setOptions: function(options){
-		L.setOptions(this, options);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	addLocation: function(lat, lng, genTime, data){
-		
-		// Store the data immediately
-		this._locationData[genTime] = data;
-		
-		var locObj = {
+	/* -----------------------------------------------------------------
+	Add a new location corresponding to this source
+		obj = {
 			"lat" : lat,
 			"lng" : lng,
 			"genTime" : genTime,
-		};
+			"recTime" : recTime,
+			"coordTime" : coordTime,
+			"data" : data,
+		}
+	Also does the ordering that for each timeType present in the obj supplied
+	----------------------------------------------------------------- */
+	addLocation: function(obj){
 		
-		// Order the marker into this._markers
-		var added = false;
-		var i = 0;
+		// Get the id for this location object so that we can order them
+		var locationId = this._locations.objects.length;
 		
-		while(!added){
-			if(i === this._locations.length){
-				this._locations.push(locObj);
-				added = true;
-			}else if(genTime <= this._locations[i].genTime){
-				this._locations.splice(i, 0, locObj);
-				added = true;
+		var locObj = obj;
+		locObj.locationId = locationId;
+		
+		// Add the location object to the list of objects
+		this._locations.objects.push(locObj);
+		
+		// Order by each type of time type
+		for(var timeType in this._locations.ordering){
+			
+			// If we can other it by this time type (i.e. it has information for this time type)
+			if(locObj[timeType]){
+				var found = false;
+				var i = 0;
+				
+				while(!found){
+					if(i === this._locations.ordering[timeType].length){
+						this._locations.ordering[timeType].push(locationId);
+						found = true;
+						
+					}else{
+						var otherId = this._locations.ordering[timeType][i];
+						var otherObj = this._locations.objects[otherId];
+						if(locObj[timeType] <= otherObj[timeType]){
+							this._locations.ordering[timeType].splice(i, 0, locationId);
+							found = true;
+						}
+						
+					}
+					i++;
+				}
+				
+			}else{
+				this._locations.unorderable[timeType].push(locationId);
 			}
-			i++;
+			
 		}
 		
 	},
 	
 	// -----------------------------------------------------------------
-	getSourceCount: function(){
-		return this._sources.length;
+	getDeviceMac: function(){
+		return this._deviceMac;
 	},
 	
 	// -----------------------------------------------------------------
 	getUserType: function(){
-		return this._userType;	
-	},
-
-	// -----------------------------------------------------------------
-	getLatestInfo: function(curTime){
-		var toRet = null;
-		for(var i = this._locations.length - 1; i > -1; i--){
-			var locObj = this._locations[i];
-			if(locObj.genTime <= curTime){
-				toRet = this._locationData[locObj.genTime];
-				toRet.genTime = locObj.genTime;
-				toRet.lat = locObj.lat;
-				toRet.lng = locObj.lng;
-				break;
-				
-			}
-		}
-		return toRet;
-	},
-	
-	// -----------------------------------------------------------------
-	setObjNet: function(obj){
-		$.extend(this.objNet, obj);
-		return this;
-	},
-	
-	// -----------------------------------------------------------------
-	getLocationData: function(genTime){
-		return this._locationData[genTime];
+		return this._userType;
 	}
 	
 });

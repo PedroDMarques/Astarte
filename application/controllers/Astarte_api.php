@@ -37,7 +37,7 @@ class Astarte_api extends CI_Controller {
 
 			   $cur_gen_time_i += 1;
 			   $cur_gen_time = $source['gen_time'];
-			   array_push($finalArray[$cur_id_i]['positions'], ['gen_time' => $source['gen_time'], 'lat' => $source['lat'], 'lng' => $source['lng'], 'data' => []]);
+			   array_push($finalArray[$cur_id_i]['positions'], ['gen_time' => $source['gen_time'], 'rec_time' => $source['rec_time'], 'coord_time' => $source['coord_time'], 'lat' => $source['lat'], 'lng' => $source['lng'], 'data' => []]);
 
 		   }
 

@@ -43,13 +43,22 @@ astarte.WebService = astarte.Class.extend({
 							var lat = sources[i].positions[j].lat;
 							var lng = sources[i].positions[j].lng;
 							var genTime = sources[i].positions[j].gen_time;
+							var recTime = sources[i].positions[j].rec_time;
+							var coordTime = sources[i].positions[j].coord_time;
 		
 							var data = {};
 							for(var k = 0; k < sources[i].positions[j].data.length; k++){
 								data[sources[i].positions[j].data[k].type] = sources[i].positions[j].data[k].value;
 							}
 		
-							broker.addLocation(deviceMac, lat, lng, genTime, data);
+							broker.addLocation(deviceMac, {
+								"lat" : lat,
+								"lng" : lng,
+								"genTime" : genTime,
+								"recTime" : recTime,
+								"coordTime" : coordTime,
+								"data" : data,
+							});
 		
 						}
 		
