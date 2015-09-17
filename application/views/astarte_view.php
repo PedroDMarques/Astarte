@@ -69,8 +69,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/ui/infoBee.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/quickStats.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/userSearch.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/valAnalizerCustomizer.js"></script>
 		
 		<link rel="stylesheet" href="<?php echo base_url();?>css/astarte_view.css">
 	
@@ -84,12 +82,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				<div class="ui vertical fluid menu">
 					<div class="item">
-						<div id="user-search" class="ui search">
-							<div class="ui icon input">
-								<input class="prompt" type="text" placeholder="Search...">
-								<i class="search icon"></i>
-							</div>
-							<div class="results"></div>
+						<div class="ui icon input">
+							<input type="text" placeholder="Search...">
+							<i class="circular search link icon"></i>
 						</div>
 					</div>
 				</div>
@@ -176,78 +171,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 						</div>
 						
-						
-						
-					</div>
-					
-					<div id="menu-component-value-analizer-customizer" class="item astarte-menu-component">
-						
-						<h3 class="ui top attached block header astarte-menu-component-header">
-							<i class="wizard icon"></i>
-							<div class="content">
-								<div class="main-header">Value Analizers</div>
-								<div class="sub header">How to interpret source values</div>
-							</div>
-						</h3>
-						
-						<div class="ui attached segment astarte-menu-component-body">
-							
-							<div class="astarte-menu-component-body-specifics">
-								
-								<div id="val-analizer-customizer-dropdown" class="ui selection dropdown">
-									<input type="hidden" name="selected-value-analizer">
-									<i class="dropdown icon"></i>
-									<div class="default text">Layer</div>
-									<div class="menu">
-										<div class="item" data-value="0">Markers</div>
-										<div class="item" data-value="1">Heatmaps</div>
-									</div>
-								</div>
-								
-								<h3 class="ui header">Heartbeat</h3>
-								
-								<div class="value-analizer-slider-container">
-									<div id="val-analizer-customizer-slider-heartbeat" class="value-analizer-slider"></div>
-									<div id="val-analizer-customizer-input-screen" class="ui disabled input">
-										<input type="text" value="100">
-									</div>
-								</div>
-								
-								<h3 class="ui header">Battery</h3>
-								
-								<div class="value-analizer-slider-container">
-									<div id="val-analizer-customizer-slider-battery" class="value-analizer-slider"></div>
-									<div id="val-analizer-customizer-input-battery" class="ui disabled input">
-										<input type="text" value="100">
-									</div>
-								</div>
-								
-								<h3 class="ui header">Movements</h3>
-								
-								<div class="value-analizer-slider-container">
-									<div id="val-analizer-customizer-slider-movements" class="value-analizer-slider"></div>
-									<div id="val-analizer-customizer-input-movements" class="ui disabled input">
-										<input type="text" value="100">
-									</div>
-								</div>
-								
-								<h3 class="ui header">Screen</h3>
-								
-								<div class="value-analizer-slider-container">
-									<div id="val-analizer-customizer-slider-screen" class="value-analizer-slider"></div>
-									<div id="val-analizer-customizer-input-screen" class="ui disabled input">
-										<input type="text" value="100">
-									</div>
-								</div>
-								
-							</div>
-							
-							<div class="ui dimmer astarte-menu-component-dimmer">
-								<div class="ui text loader">Loading...</div>
-							</div>
-							
-						</div>
-						
 					</div>
 
 				</ul>
@@ -292,9 +215,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<div class="ui raised segment">
 							<div class="flex-container flex-space-between">
 								<h3 class="ui header">Quick Stats:</h3>
-								<div id="quick-stats-ignore-time" class="ui checked disabled checkbox">
+								<div class="ui disabled checkbox">
 									<label>Ignore Time</label>
-									<input type="checkbox" checked="" class="hidden">
+									<input id="quick-stats-ignore-time" type="checkbox" checked="" class="hidden">
 								</div>
 							</div>
 							<div class="ui celled selection list">
@@ -319,6 +242,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</div>
 						</div>
 					</div>
+					
+					<script>
+						$(".ui.checkbox").checkbox();
+					</script>
 					
 				</div>
 				

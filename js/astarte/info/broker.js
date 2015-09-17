@@ -34,17 +34,6 @@ astarte.Broker = astarte.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	getSourceSearchList: function(){
-		var toRet = [];
-		for(var deviceMac in this._sources){
-			toRet.push({
-				"title" : deviceMac,
-			});
-		}
-		return toRet;
-	},
-	
-	// -----------------------------------------------------------------
 	addSection: function(id, start, end, isOpen, risks){
 		var section = new astarte.Section(id, start, end, isOpen, risks);
 		section.setObjNet({"routeLayer" : astarte.ffon(this, ["map"]).getDataLayer("routes")});

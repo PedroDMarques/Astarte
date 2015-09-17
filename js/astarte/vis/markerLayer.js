@@ -11,6 +11,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	objNet: {
 		"marker_creator" : null,
+		"val_analizer" : null,
 	},
 	
 	// -----------------------------------------------------------------
@@ -328,16 +329,6 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 	// -----------------------------------------------------------------
 	getFirstMarker: function(marker){
 		return this._markers[marker.deviceMac][0];
-	},
-	
-	// -----------------------------------------------------------------
-	getFirstMarkerByDeviceMac: function(deviceMac){
-		return this._markers[deviceMac][0];
-	},
-	
-	// -----------------------------------------------------------------
-	getLastMarkerByDeviceMac: function(deviceMac){
-		return astarte.util.lastInArr(this._markers[deviceMac]);
 	},
 	
 	// -----------------------------------------------------------------

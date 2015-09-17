@@ -19,12 +19,6 @@ var infoBee = new astarte.InfoBee($("#menu-component-info-bee"), {
 	"start_open" : false,
 });
 
-var userSearch = new astarte.UserSearch({
-	"broker" : broker,
-},{
-	"user_search" : "user-search",
-});
-
 var quickStats = new astarte.QuickStats({}, {
 	"ignore_time_checkbox" : "quick-stats-ignore-time",
 	"all_markers" : "quick-stats-all-markers",
@@ -92,10 +86,6 @@ var markerLayer = new astarte.MarkerLayer({
 
 map.addDataLayer("markers", markerLayer);
 
-userSearch.setObjNet({
-	"markerLayer" : markerLayer,
-});
-
 var heatLayer = new astarte.HeatLayer({
 	"map" : map,
 	"val_analizer" : analizer,
@@ -108,21 +98,6 @@ var routeLayer = new astarte.RouteLayer({
 }, {});
 
 map.addDataLayer("routes", routeLayer);
-
-var valAnalizerCustomizer = new astarte.ValAnalizerCustomizer($("#menu-component-value-analizer-customizer"), {
-	"map" : map,
-}, {
-	"dropdown" : "val-analizer-customizer-dropdown",
-	"heartbeat_slider" : "val-analizer-customizer-slider-heartbeat",
-	"heartbeat_input" : "val-analizer-customizer-input-heartbeat",
-	"battery_slider" : "val-analizer-customizer-slider-battery",
-	"battery_input" : "val-analizer-customizer-input-battery",
-	"movements_slider" : "val-analizer-customizer-slider-movements",
-	"movements_input" : "val-analizer-customizer-input-movements",
-	"screen_slider" : "val-analizer-customizer-slider-screen",
-	"screen_input" : "val-analizer-customizer-input-screen",
-});
-
 
 var webService = new astarte.WebService({
 	"broker" : broker,
