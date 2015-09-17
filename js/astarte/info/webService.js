@@ -42,10 +42,13 @@ astarte.WebService = astarte.Class.extend({
 						for(var j = 0; j < sources[i].positions.length; j++){
 							var lat = sources[i].positions[j].lat;
 							var lng = sources[i].positions[j].lng;
-							var genTime = sources[i].positions[j].gen_time;
-							var recTime = sources[i].positions[j].rec_time;
-							var coordTime = sources[i].positions[j].coord_time;
-		
+							
+							var timeInformation = {
+								"genTime" : sources[i].positions[j].gen_time,
+								"recTime" : sources[i].positions[j].rec_time,
+								"coordTime" : sources[i].positions[j].coord_time,
+							}
+							
 							var data = {};
 							for(var k = 0; k < sources[i].positions[j].data.length; k++){
 								data[sources[i].positions[j].data[k].type] = sources[i].positions[j].data[k].value;
@@ -54,9 +57,7 @@ astarte.WebService = astarte.Class.extend({
 							broker.addLocation(deviceMac, {
 								"lat" : lat,
 								"lng" : lng,
-								"genTime" : genTime,
-								"recTime" : recTime,
-								"coordTime" : coordTime,
+								"timeInformation" : timeInformation,
 								"data" : data,
 							});
 		

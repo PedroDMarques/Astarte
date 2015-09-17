@@ -86,7 +86,7 @@ astarte.Broker = astarte.Class.extend({
 	addLocation: function(deviceMac, obj){
 		
 		// Verifying variables
-		if(!this._sources[deviceMac] || !obj.lat || !obj.lng || !obj.genTime){
+		if(!this._sources[deviceMac] || !obj.lat || !obj.lng || !obj.timeInformation){
 			return;
 		}
 		
@@ -94,19 +94,13 @@ astarte.Broker = astarte.Class.extend({
 		
 		this.fireEvent("location_added", $.extend(obj, {"deviceMac" : deviceMac}));
 		
-		/*
 		var timeline = astarte.ffon(this, ["map", "timeline"]);
 		
-		if(obj.genTime < this._minFound){
-			this._minFound = obj.genTime;
-			timeline.setMin(obj.genTime);
+		for(var timeType in obj.timeInformation){
+			timeline.setMinIfLower(timeType, obj.timeInformation[timeType]);
+			timeline.setMaxIfHigher(timeType, obj.timeInformation[timeType]);
 		}
 		
-		if(obj.genTime > this._maxFound){
-			this._maxFound = obj.genTime;
-			timeline.setMax(obj.genTime);
-		}
-		*/
 		return this;
 	},
 	

@@ -197,7 +197,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<button id="timeline-play-button" type="button" class="ui basic circular big icon button"><i class="play icon"></i></button>
 									<button type="button" class="ui basic circular icon button"><i class="pause icon"></i></button>
 								</div>
-								<p id="timeline-display">2015:22:22 12-12-12</p>
+								<p id="timeline-display"></p>
 							</div>
 							
 							<div id="timeline-slider"></div>

@@ -55,9 +55,11 @@ astarte.Source = astarte.Class.extend({
 		obj = {
 			"lat" : lat,
 			"lng" : lng,
-			"genTime" : genTime,
-			"recTime" : recTime,
-			"coordTime" : coordTime,
+			"timeInformation" : {
+				"genTime" : genTime,
+				"recTime" : recTime,
+				"coordTime" : coordTime,
+			}
 			"data" : data,
 		}
 	Also does the ordering that for each timeType present in the obj supplied
@@ -77,7 +79,7 @@ astarte.Source = astarte.Class.extend({
 		for(var timeType in this._locations.ordering){
 			
 			// If we can other it by this time type (i.e. it has information for this time type)
-			if(locObj[timeType]){
+			if(locObj.timeInformation[timeType]){
 				var found = false;
 				var i = 0;
 				
@@ -89,7 +91,7 @@ astarte.Source = astarte.Class.extend({
 					}else{
 						var otherId = this._locations.ordering[timeType][i];
 						var otherObj = this._locations.objects[otherId];
-						if(locObj[timeType] <= otherObj[timeType]){
+						if(locObj.timeInformation[timeType] <= otherObj.timeInformation[timeType]){
 							this._locations.ordering[timeType].splice(i, 0, locationId);
 							found = true;
 						}
