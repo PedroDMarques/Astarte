@@ -4,7 +4,7 @@
 
 astarte.UITimeline = astarte.Class.extend({
 
-	// -----------------------------------------------------------------
+	
 	options: {
 		"timeline" : null,
 		"timeline_display" : null,
