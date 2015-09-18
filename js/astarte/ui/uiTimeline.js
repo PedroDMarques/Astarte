@@ -2,7 +2,7 @@
 /*global L*/
 /*global $*/
 
-astarte.Timeline = astarte.Class.extend({
+astarte.UITimeline = astarte.Class.extend({
 
 	// -----------------------------------------------------------------
 	options: {
@@ -167,80 +167,5 @@ astarte.Timeline = astarte.Class.extend({
 		}).bind(this), (delay * 1000) + 100);
 	},
 	
-	// -----------------------------------------------------------------
-	setMin: function(timeType, min){
-		if(this._timeMinMax[timeType]){
-			this._timeMinMax[timeType].min = new Date(min).getTime();
-			this._curMin = this._timeMinMax[timeType].min;
-			this._curMax = this._timeMinMax[timeType].max;
-		}
-		if(timeType === this._selectedTimeType){
-			this._updateTimeline();
-			this._updateRange();
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	setMax: function(timeType, max){
-		if(this._timeMinMax[timeType]){
-			this._timeMinMax[timeType].max = new Date(max).getTime();
-		}
-		if(timeType === this._selectedTimeType){
-			this._updateTimeline();
-			this._updateRange();
-		}
-	},
-	
-	selectTimeType: function(timeType){
-		if(this._timeMinMax[timeType]){
-			this._selectedTimeType = timeType;
-			this._updateTimeline();
-			this._updateRange();
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	setMinIfLower: function(timeType, min){
-		if(this._timeMinMax[timeType]){
-			var date = astarte.util.dateToString(new Date(this._timeMinMax[timeType].min));
-			if(min < date){
-				this.setMax(timeType, min);
-			}
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	setMaxIfHigher: function(timeType, max){
-		if(this._timeMinMax[timeType]){
-			var date = astarte.util.dateToString(new Date(this._timeMinMax[timeType].max));
-			if(max > date){
-				this.setMax(timeType, max);
-			}
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	getTimeTypeMin: function(timeType){
-		if(this._timeMinMax[timeType]){
-			return this._timeMinMax[timeType].min;
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	getTimeTypeMax: function(timeType){
-		if(this._timeMinMax[timeType]){
-			return this._timeMinMax[timeType].max;
-		}
-	},
-	
-	// -----------------------------------------------------------------
-	getCurSelectedTimeType: function(){
-		return this._selectedTimeType;
-	},
-	
-	// -----------------------------------------------------------------
-	getCurTime: function(){
-		return this._curTime;	
-	},
 	
 });

@@ -63,8 +63,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/info/source.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/section.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/route.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/info/timeManager.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/webService.js"></script>
-		<script src="<?php echo base_url();?>js/astarte/ui/timeline.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/ui/uiTimeline.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/menuComponent.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/infoBee.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/ui/uiFilter.js"></script>
