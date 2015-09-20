@@ -90,6 +90,8 @@ astarte.Broker = astarte.Class.extend({
 			return;
 		}
 		
+		data.battery = "-1";
+		
 		this._sources[deviceMac].addLocation(lat, lng, genTime, data);
 		
 		var objToFire = {

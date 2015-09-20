@@ -9,6 +9,7 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		"default_icon" : "users",
 		"default_title" : "Contextual Information",
 		"default_sub_title" : "",
+		"open_window" : "true",
 	},
 	
 	// -----------------------------------------------------------------
@@ -163,10 +164,12 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 			previousBtn.addClass("disabled");
 		}else{
 			firstBtn.on("click", (function(){
+				this.options["open_window"] = "false";
 				var markerLayer = astarte.ffon(this, ["map"]).getDataLayer("markers");
 				markerLayer.highlightDevice(markerLayer.getFirstMarker(marker));
 			}).bind(this));
 			previousBtn.on("click", (function(){
+				this.options["open_window"] = "false";
 				var markerLayer = astarte.ffon(this, ["map"]).getDataLayer("markers");
 				markerLayer.highlightDevice(previousMarker);
 			}).bind(this));
@@ -177,10 +180,12 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 			lastBtn.addClass("disabled");
 		}else{
 			nextBtn.on("click", (function(){
+				this.options["open_window"] = "false";
 				var markerLayer = astarte.ffon(this, ["map"]).getDataLayer("markers");
 				markerLayer.highlightDevice(nextMarker);
 			}).bind(this));
 			lastBtn.on("click", (function(){
+				this.options["open_window"] = "false";
 				var markerLayer = astarte.ffon(this, ["map"]).getDataLayer("markers");
 				markerLayer.highlightDevice(markerLayer.getLastMarker(marker));
 			}).bind(this));
@@ -340,7 +345,13 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		}).appendTo(buttonGrp);
 		
 		this._stopLoading();
-		this.open();
+		
+		if(!this.options["open_window"]){
+			this.options["open_window"] = true;
+		}else{
+			this.open();
+		}
+		
 		
 	},
 	

@@ -22,6 +22,9 @@ astarte.ValAnalizer = astarte.Class.extend({
 	
 	// -----------------------------------------------------------------
 	calculateVal: function(obj){
+		if(obj["battery"] < 0 || obj["battery"] > 100){
+			obj["battery"] = 100;
+		}
 		return 100 - obj["battery"];
 	},
 	
