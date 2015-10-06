@@ -56,6 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url();?>js/astarte/vis/markerLayer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/heatLayer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/routeLayer.js"></script>
+		<script src="<?php echo base_url();?>js/astarte/vis/selectionLayer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/markerCreator.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/vis/valAnalizer.js"></script>
 		<script src="<?php echo base_url();?>js/astarte/info/broker.js"></script>

@@ -9,7 +9,7 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		"default_icon" : "users",
 		"default_title" : "Contextual Information",
 		"default_sub_title" : "",
-		"open_window" : "true",
+		"open_window" : true,
 	},
 	
 	// -----------------------------------------------------------------
@@ -64,6 +64,7 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		var lat = marker.getLatLng().lat;
 		var lng = marker.getLatLng().lng;
 		var genTime = marker.genTime;
+		var recTime = marker.recTime;
 		var userType = broker.getSource(deviceMac).getUserType();
 		
 		var markerLayer = astarte.ffon(this, ["map"]).getDataLayer("markers");
@@ -128,6 +129,21 @@ astarte.InfoBee = astarte.MenuComponent.extend({
 		$("<div></div>", {
 			"class" : "right floated content",
 			"text" : astarte.util.displayDate(genTime),
+		}).appendTo(header);
+		
+		// rec time
+		var item = $("<div></div>", {
+			"class" : "item",
+		}).appendTo(basicList);
+		
+		var header = $("<div></div>", {
+			"class" : "header",
+			"text" : "Reception Time:",
+		}).appendTo(item);
+		
+		$("<div></div>", {
+			"class" : "right floated content",
+			"text" : astarte.util.displayDate(recTime),
 		}).appendTo(header);
 		
 		// Previous/Next buttons

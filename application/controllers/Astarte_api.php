@@ -11,6 +11,48 @@ class Astarte_api extends CI_Controller {
 
     }
 
+	public function get_sources_in_area($latMin, $latMax, $lngMin, $lngMax){
+
+	   $sources = $this->astarte_model->get_sources_in_area($latMin, $latMax, $lngMin, $lngMax);
+
+	   $finalArray = [];
+	   $cur_id = null;
+	   $cur_id_i = -1;
+	   $cur_gen_time = null;
+	   $cur_gen_time_i = -1;
+
+	   foreach($sources as $source){
+
+		   if($cur_id != $source['id']){
+
+			   $cur_id_i += 1;
+			   $cur_gen_time = null;
+			   $cur_gen_time_i = -1;
+			   $cur_id = $source['id'];
+			   array_push($finalArray, ['id' => $cur_id, 'positions' => []]);
+
+		   }
+
+		   if($cur_id == $source['id'] && $cur_gen_time != $source['gen_time']){
+
+			   $cur_gen_time_i += 1;
+			   $cur_gen_time = $source['gen_time'];
+			   array_push($finalArray[$cur_id_i]['positions'], ['gen_time' => $source['gen_time'], 'rec_time' => $source['rec_time'], 'lat' => $source['lat'], 'lng' => $source['lng'], 'data' => []]);
+
+		   }
+
+		   if($cur_id == $source['id'] && $cur_gen_time == $source['gen_time']){
+
+			   array_push($finalArray[$cur_id_i]['positions'][$cur_gen_time_i]['data'], ['type' => strtolower($source['type']), 'value' => $source['value']]);
+
+		   }
+
+	   }
+
+	   echo json_encode($finalArray);
+
+   }
+
 	public function get_all_sources(){
 
 	   $sources = $this->astarte_model->get_all_sources();
@@ -37,7 +79,7 @@ class Astarte_api extends CI_Controller {
 
 			   $cur_gen_time_i += 1;
 			   $cur_gen_time = $source['gen_time'];
-			   array_push($finalArray[$cur_id_i]['positions'], ['gen_time' => $source['gen_time'], 'lat' => $source['lat'], 'lng' => $source['lng'], 'data' => []]);
+			   array_push($finalArray[$cur_id_i]['positions'], ['gen_time' => $source['gen_time'], 'rec_time' => $source['rec_time'], 'lat' => $source['lat'], 'lng' => $source['lng'], 'data' => []]);
 
 		   }
 

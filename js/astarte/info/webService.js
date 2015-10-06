@@ -6,6 +6,10 @@ astarte.WebService = astarte.Class.extend({
 	// -----------------------------------------------------------------
 	options: {
 		"REQUEST_URL" : "http://localhost/astarte/index.php/astarte_api/",
+		"latMin" : "0",
+		"latMax" : "0",
+		"lngMin" : "0",
+		"lngMax" : "0",
 	},
 	
 	// -----------------------------------------------------------------
@@ -43,13 +47,14 @@ astarte.WebService = astarte.Class.extend({
 							var lat = sources[i].positions[j].lat;
 							var lng = sources[i].positions[j].lng;
 							var genTime = sources[i].positions[j].gen_time;
+							var recTime = sources[i].positions[j].rec_time;
 		
 							var data = {};
 							for(var k = 0; k < sources[i].positions[j].data.length; k++){
 								data[sources[i].positions[j].data[k].type] = sources[i].positions[j].data[k].value;
 							}
 		
-							broker.addLocation(deviceMac, lat, lng, genTime, data);
+							broker.addLocation(deviceMac, lat, lng, genTime, recTime, data);
 		
 						}
 		
@@ -60,7 +65,7 @@ astarte.WebService = astarte.Class.extend({
 		
 		}).bind(this);
 		
-		request.open("GET", this.options["REQUEST_URL"] + "get_all_sources", true);
+		request.open("GET", this.options["REQUEST_URL"] + "get_sources_in_area/" + this.options.latMin + "/" + this.options.latMax + "/" + this.options.lngMin + "/" + this.options.lngMax, true);
 		request.send();
 		return this;
 	},

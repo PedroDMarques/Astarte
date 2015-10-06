@@ -78,6 +78,10 @@ quickStats.setObjNet({
 	"map" : map,
 });
 
+var webService = new astarte.WebService({
+	"broker" : broker,
+}, {});
+
 var markerLayer = new astarte.MarkerLayer({
 	"map" : map,
 	"marker_creator" : markerCreator,
@@ -85,6 +89,15 @@ var markerLayer = new astarte.MarkerLayer({
 }, {});
 
 map.addDataLayer("markers", markerLayer);
+
+var selectionLayer = new astarte.SelectionLayer({
+	"map" : map,
+	"webService" : webService,
+},{});
+
+map.addDataLayer("selection", selectionLayer);
+
+map.on("click", selectionLayer.selectFirstPoint, selectionLayer);
 
 var heatLayer = new astarte.HeatLayer({
 	"map" : map,
@@ -99,14 +112,10 @@ var routeLayer = new astarte.RouteLayer({
 
 map.addDataLayer("routes", routeLayer);
 
-var webService = new astarte.WebService({
-	"broker" : broker,
-}, {});
-
 $("#side-menu-scroll").sortable({
 	"items" : "> .astarte-menu-component",
 	"handle" : ".astarte-menu-component-header",
 	"containment" : "parent",
 });
 
-webService.start();
+//webService.start();

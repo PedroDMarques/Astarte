@@ -39,7 +39,7 @@ astarte.Source = L.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	addLocation: function(lat, lng, genTime, data){
+	addLocation: function(lat, lng, genTime, recTime, data){
 		
 		// Store the data immediately
 		this._locationData[genTime] = data;
@@ -48,6 +48,7 @@ astarte.Source = L.Class.extend({
 			"lat" : lat,
 			"lng" : lng,
 			"genTime" : genTime,
+			"recTime" : recTime,
 		};
 		
 		// Order the marker into this._markers

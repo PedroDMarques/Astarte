@@ -28,6 +28,7 @@ astarte.Map = L.mapbox.Map.extend({
 		this._dataLayers = {};
 		this._setupContextMenu();
 		this.on("zoomend", function(event){console.log("current zoom = " + event.target._zoom);}, this);
+		
 		return this;
 	},
 	

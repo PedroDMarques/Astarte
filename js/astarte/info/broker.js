@@ -83,20 +83,21 @@ astarte.Broker = astarte.Class.extend({
 	},
 	
 	// -----------------------------------------------------------------
-	addLocation: function(deviceMac, lat, lng, genTime, data){
+	addLocation: function(deviceMac, lat, lng, genTime, recTime, data){
 		
 		// Verifying variables
 		if(!this._sources[deviceMac] || !lat || !lng || !genTime){
 			return;
 		}
 		
-		this._sources[deviceMac].addLocation(lat, lng, genTime, data);
+		this._sources[deviceMac].addLocation(lat, lng, genTime, recTime, data);
 		
 		var objToFire = {
 			"deviceMac" : deviceMac,
 			"lat" : lat,
 			"lng" : lng,
 			"genTime" : genTime,
+			"recTime" : recTime,
 			"data" : data,
 		}
 		

@@ -99,6 +99,7 @@ astarte.MarkerLayer = astarte.DataLayer.extend({
 		});
 		
 		marker.genTime = obj.genTime;
+		marker.recTime = obj.recTime;
 		marker.deviceMac = obj.deviceMac;
 		
 		var analizer = astarte.ffon(this, ["val_analizer"]);
